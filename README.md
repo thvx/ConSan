@@ -1,1 +1,1 @@
-# Plataforma de Denuncias Ciudadanas | DenunciaSeguro - G3
+# Plataforma de Denuncias Ciudadanas | DenunciaSeguro - G3 
