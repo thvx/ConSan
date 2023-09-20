@@ -11,7 +11,7 @@ CREATE TABLE Usuario (
     Apellido VARCHAR(80),
     DNI VARCHAR(8),
     NombreDeUsuario VARCHAR(35) UNIQUE,
-    Contrasena VARCHAR(20);
+    Contrasena VARCHAR(20),
     Correo VARCHAR(255),
     Direccion VARCHAR(255),
     NumeroDeCelular VARCHAR(9),
