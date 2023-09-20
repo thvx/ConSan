@@ -1,3 +1,5 @@
+import pyodbc
+
 class ConexionSQLServer:
     def __init__(self, servidor, base_de_datos, nombre_usuario, contrasena):
         self.server = servidor
@@ -14,6 +16,28 @@ class ConexionSQLServer:
         except Exception as e:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
+        
+    def insertarUsuario(self):
+        try:
+            conex = ConexionSQLServer.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES()") #FALTA TERMINAR
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
+    
+    def autenticarUsuario(self):
+        return None
+    
+    def registrarDenuncia(self):
+        return None
+    
+    def buscarDenuncia(self):
+        return None
+    
+    def datosDenuncia(self):
+        return None
 
     def cerrarConexion(self):
         if self.conex:
