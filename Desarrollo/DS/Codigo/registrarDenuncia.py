@@ -1,9 +1,8 @@
 from flask import Flask, request, render_template
+from bbdd import ConexionSQLServer
 import pyodbc
 import uuid
 import random
-
-
 
 app = Flask(__name__)
 
@@ -33,10 +32,13 @@ def registroUsuario():
 				erroneo = True
 		if not erroneo:
 			ID_usuario = uuid.uuid4()
+			SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+			array = (ID_usuario, nombre, apellidos, DNI, usuario, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac, contrasena)
 			msg = 'Registro con éxito'
 			# *********************************************************************************************
 			# A partir de aquí se realiza la conexión a DB para mandar los datos a la tabla correspondiente
 			# *********************************************************************************************
+
 		else:
 			msg = 'Los datos no pueden ser numéricos'
 	else:

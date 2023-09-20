@@ -17,12 +17,21 @@ class ConexionSQLServer:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
         
+    def cerrarConexion(self):
+        if self.conex:
+            self.conex.close()
+        
+    def getDatosUuario(self, datos):
+        self.datos_usuario = datos
+        
     def insertarUsuario(self):
         try:
-            conex = ConexionSQLServer.establecerConexion()
+            conex = self.establecerConexion()
             if conex:
                 cursor = conex.cursor()
-                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES()") #FALTA TERMINAR
+                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion, Contraseña) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
+                cursor.commit()
+                self.cerrarConexion()
         except:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
@@ -39,9 +48,7 @@ class ConexionSQLServer:
     def datosDenuncia(self):
         return None
 
-    def cerrarConexion(self):
-        if self.conex:
-            self.conex.close()
+    
 '''
 MODO DE USO DE LA CLASE ConexionSQLServer
 
