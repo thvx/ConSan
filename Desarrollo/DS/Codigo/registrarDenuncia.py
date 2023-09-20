@@ -12,6 +12,7 @@ def inicio():
 
 @app.route('/registro-usuario', methods = ['GET','POST'])
 def registroUsuario():
+	verificado = False
 	msg = ''
 	erroneo = False
 	if request.method == 'POST':
@@ -19,26 +20,29 @@ def registroUsuario():
 		apellidos = request.form['apellidos']
 		DNI = request.form['DNI']
 		usuario = request.form['usuario']
+		contrasena = request.form['contrasena']
 		correo = request.form['correo']
 		direccion = request.form['direccion']
 		num_celular = request.form['num_celular']
 		administrador = request.form['administrador']
 		foto_perfil = request.form['foto_perfil']
 		fecha_creac = request.form['fecha_creac']
-		contrasena = request.form['contrasena']
 		datos_esenciales = (nombre, apellidos)
 		for dato_esencial in datos_esenciales:
 			if dato_esencial.isdigit():
 				erroneo = True
+			
 		if not erroneo:
-			ID_usuario = uuid.uuid4()
-			SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
-			array = (ID_usuario, nombre, apellidos, DNI, usuario, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac, contrasena)
-			msg = 'Registro con éxito'
-			# *********************************************************************************************
-			# A partir de aquí se realiza la conexión a DB para mandar los datos a la tabla correspondiente
-			# *********************************************************************************************
-
+			while not verificado:
+				ID_usuario = uuid.uuid4()
+				SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+				SQL.getUUID(ID_usuario)
+				if SQL.encontrarUUID() == None:
+					array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
+					SQL.getDatosUuario(array)
+					SQL.insertarUsuario()
+					msg = 'Registro con éxito'
+					verificado = True
 		else:
 			msg = 'Los datos no pueden ser numéricos'
 	else:
@@ -50,9 +54,14 @@ def loginUsuario():
 	msg = ''
 	correo = request.form['correo']
 	contrasena = request.form['contrasena']
-	# ******************************************************************************************************
-	# Aquí se debe validar con la BBDD y permitir el acceso a la plataforma en caso los datos sean correctos.
-	# ******************************************************************************************************
+	SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+	SQL.getLoginUsuario(correo, contrasena)
+	if SQL.autenticarUsuario != None:
+		msg = 'Logeado con éxito'
+		# ABRIRLE LA PANTALLA PRINCIPAL (FALTA VER CÓMO SE HACE ESO)
+		pass
+	else:
+		msg = 'Correo o contraseña incorrectos'
 	return render_template('login.html', msg)
 
 @app.route('/registro-denuncia', methods = ['GET', 'POST'])

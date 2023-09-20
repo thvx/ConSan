@@ -29,15 +29,45 @@ class ConexionSQLServer:
             conex = self.establecerConexion()
             if conex:
                 cursor = conex.cursor()
-                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion, Contraseña) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
+                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Contrasena, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
                 cursor.commit()
                 self.cerrarConexion()
         except:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
     
+    def getUUID(self, UUID):
+        self.UUID = UUID
+    
+    def encontrarUUID(self):
+        try:
+            conex = self.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute(f"SELECT ID_Usuario FROM Usuario WHERE ID_USUARIO = {self.UUID}")
+                encontrado = cursor.fetchone()
+                self.cerrarConexion()
+                return encontrado
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
+    
+    def getLoginUsuario(self, correo, contrasena):
+        self.correo = correo
+        self.contrasena = contrasena
+
     def autenticarUsuario(self):
-        return None
+        try:
+            conex = self.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute(f"SELECT Correo, Contrasena FROM Usuario WHERE Correo = {self.correo} AND Contrasena = {self.contrasena}")
+                datos_usuario = cursor.fetchone()
+                self.cerrarConexion()
+                return datos_usuario
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
     
     def registrarDenuncia(self):
         return None
