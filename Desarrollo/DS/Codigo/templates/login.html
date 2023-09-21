@@ -37,12 +37,12 @@
                         <label for="contrasena" class="form-label">Contraseña</label>
                         <input type="password" name="contrasena" id="contrasena" class="form-control" required>
                     </div>
-    
                 <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                <a id="mostrar-registro" class="btn btn-primary btn-lg" href="javascript:void(0);" onclick="mostrarRegistro()">Registrarse</a>
             </form>
         </section>
 
-        <section class="section-formulario">
+        <section class="section-formulario" id="section-formulario" style="display: none;">
             <form class="formulario-registro" action="/registro-usuario" method="POST">
                 
                 <div class="row">
@@ -98,3 +98,21 @@
     </footer>
 </body>
 </html>
+
+<script>
+    function mostrarRegistro() {
+        var registroContainer = document.getElementById("section-formulario");
+        var loginForm = document.querySelector(".formulario-inicio-sesion");
+        var mostrarRegistroLink = document.getElementById("mostrar-registro");
+
+        if (registroContainer.style.display === "none") {
+            registroContainer.style.display = "block";
+            loginForm.style.display = "none";
+            mostrarRegistroLink.innerHTML = "Ocultar registro";
+        } else {
+            registroContainer.style.display = "none";
+            loginForm.style.display = "block";
+            mostrarRegistroLink.innerHTML = "Registrarse";
+        }
+    }
+</script>
