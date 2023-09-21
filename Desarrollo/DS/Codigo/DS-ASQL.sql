@@ -17,7 +17,7 @@ CREATE TABLE Usuario (
     NumeroDeCelular VARCHAR(9),
     Administrador BIT,  -- Campo que indica si el usuario es administrador (true=1/false=0)
     FotoPerfil VARCHAR(255), -- Agregar (DEFAULT 'URL_de_la_imagen_predeterminada',) cuando tengamos el link de la imagen predise�ada
-    FechaCreacion DATE
+    FechaCreacion DATETIME
 );
 -- Tabla Publicacion
 CREATE TABLE Publicacion (
@@ -25,7 +25,7 @@ CREATE TABLE Publicacion (
     TituloDePublicacion VARCHAR(150),
     Descripcion TEXT,
     ID_Usuario INT,  -- Referencia al ID del usuario que cre� la publicaci�n
-    FechaCreacion DATE,
+    FechaCreacion DATETIME,
     Relevancia INT DEFAULT 0,
     FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
 );

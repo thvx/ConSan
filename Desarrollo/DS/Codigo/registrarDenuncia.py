@@ -1,8 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from bbdd import ConexionSQLServer
-import pyodbc
 import uuid
-import random
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -24,9 +23,10 @@ def registroUsuario():
 		correo = request.form['correo']
 		direccion = request.form['direccion']
 		num_celular = request.form['num_celular']
-		administrador = request.form['administrador']
-		foto_perfil = request.form['foto_perfil']
-		fecha_creac = request.form['fecha_creac']
+		administrador = 0 
+		foto_perfil = request.form['foto_perfil'] # DEBE SER OPCIONAL
+		fecha_creac = datetime.now()
+		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
 		datos_esenciales = (nombre, apellidos)
 		for dato_esencial in datos_esenciales:
 			if dato_esencial.isdigit():
@@ -36,10 +36,10 @@ def registroUsuario():
 			while not verificado:
 				ID_usuario = uuid.uuid4()
 				SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
-				SQL.getUUID(ID_usuario)
-				if SQL.encontrarUUID() == None:
+				SQL.getUUIDUsuario(ID_usuario)
+				if SQL.encontrarUUIDUsuario() == None:
 					array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
-					SQL.getDatosUuario(array)
+					SQL.getDatosUsuario(array)
 					SQL.insertarUsuario()
 					msg = 'Registro con éxito'
 					verificado = True
@@ -57,32 +57,55 @@ def loginUsuario():
 	SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
 	SQL.getLoginUsuario(correo, contrasena)
 	if SQL.autenticarUsuario != None:
-		# UTILIZAR SESSION AQUÍ
+		datos_usuario = SQL.devolverUsuario()
+		session['ID_usuario'] = datos_usuario[0] 
+		session['nombre'] = datos_usuario[1] 
+		session['apellido'] = datos_usuario[2] 
+		session['DNI'] = datos_usuario[3]
+		session['usuario'] = datos_usuario[4] 
+		session['correo'] = datos_usuario[6]
+		session['direccion'] = datos_usuario[7]
+		session['celular'] = datos_usuario[8]
+		session['admin'] = datos_usuario[9]
+		session['foto_perfil'] = datos_usuario[10]
 		msg = 'Logeado con éxito'
-		return redirect(url_for('registro-denuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
+		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
 	return render_template('login.html', msg)
 
+@app.route('/logout')
+def cerrarSesion():
+	session.clear()
+	return redirect(url_for('inicio'))
+
 @app.route('/registro-denuncia', methods = ['GET', 'POST'])
 def registroDenuncia():
 	msg = ''
-	ID_publicacion = ''
+	verificado = False
 	if request.method == 'POST':
+		
 		titulo = request.form['titulo']
 		descripcion = request.form['descripcion']
-		ID_usuario = request.form['ID_usuario']
-		fecha_creacion = request.form['fecha_creacion']
-		relevancia = request.form['relevancia']
-		ID_publicacion = str(random.randint(100,1000)) + str(random.randint(100,1000)) + str(random.randint(100,1000)) + str(random.randint(100,1000))
-		URL_imagen = request.form['URL_imagen']
-		# ******************************************************************************************************
-		# Aquí se debe validar con la BBDD que la ID no se repita con otra ID y subir los datos a la BBDD
-		# ******************************************************************************************************
-		msg = 'Registro con éxito'
+		ID_usuario = session['ID_usuario']
+		fecha_creac = datetime.now()
+		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
+		relevancia = 0
+		URL_imagen = request.form['URL_imagen'] # FALTA ACORDAR CUANDO SON VARIAS IMAGENES
+		while not verificado:
+			ID_publicacion = uuid.uuid4()
+			SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+			SQL.getUUIDPublicacion(ID_publicacion)
+			if SQL.encontrarUUIDPublicacion() == None:
+				array = (ID_publicacion, titulo, descripcion, ID_usuario, fecha_creac, relevancia)
+				SQL.getDatosPublicacion(array)
+				SQL.insertarDenuncia()
+				msg = 'Registro con éxito'
+				verificado = True
+		# FALTA INSERTAR IMAGENES EN LA TABLA
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('registrarDenuncia.html', msg, ID_publicacion)
+	return render_template('registrarDenuncia.html', msg)
 
 @app.route('/seguimiento-denuncia', methods = ['GET', 'POST'])
 def seguimientoDenuncia():

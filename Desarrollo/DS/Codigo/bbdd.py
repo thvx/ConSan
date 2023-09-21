@@ -21,7 +21,7 @@ class ConexionSQLServer:
         if self.conex:
             self.conex.close()
         
-    def getDatosUuario(self, datos):
+    def getDatosUsuario(self, datos):
         self.datos_usuario = datos
         
     def insertarUsuario(self):
@@ -36,18 +36,18 @@ class ConexionSQLServer:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
     
-    def getUUID(self, UUID):
-        self.UUID = UUID
+    def getUUIDUsuario(self, UUID):
+        self.UUID_usuario = UUID
     
-    def encontrarUUID(self):
+    def encontrarUUIDUsuario(self):
         try:
             conex = self.establecerConexion()
             if conex:
                 cursor = conex.cursor()
-                cursor.execute(f"SELECT ID_Usuario FROM Usuario WHERE ID_USUARIO = {self.UUID}")
-                encontrado = cursor.fetchone()
+                cursor.execute(f"SELECT ID_Usuario FROM Usuario WHERE ID_Usuario = {self.UUID_usuario}")
+                encontrado_usuario = cursor.fetchone()
                 self.cerrarConexion()
-                return encontrado
+                return encontrado_usuario
         except:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
@@ -62,18 +62,56 @@ class ConexionSQLServer:
             if conex:
                 cursor = conex.cursor()
                 cursor.execute(f"SELECT Correo, Contrasena FROM Usuario WHERE Correo = {self.correo} AND Contrasena = {self.contrasena}")
+                esencial_usuario = cursor.fetchone()
+                self.cerrarConexion()
+                return esencial_usuario
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
+        
+    def devolverUsuario(self):
+        try:
+            conex = self.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute(f"SELECT * FROM Usuario WHERE Correo = {self.correo} AND Contrasena = {self.contrasena}")
                 datos_usuario = cursor.fetchone()
                 self.cerrarConexion()
                 return datos_usuario
         except:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
+        
+    def getUUIDPublicacion(self, UUID):
+        self.UUID_publicacion = UUID
+        
+    def encontrarUUIDPublicacion(self):
+        try:
+            conex = self.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute(f"SELECT ID_Publicacion FROM Publicacion WHERE ID_Publicacion = {self.UUID_publicacion}")
+                encontrado_publicacion = cursor.fetchone()
+                self.cerrarConexion()
+                return encontrado_publicacion
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
+        
+    def getDatosPublicacion(self, datos):
+        self.datos_publicacion = datos
     
-    def registrarDenuncia(self):
-        return None
-    
-    def buscarDenuncia(self):
-        return None
+    def insertarDenuncia(self):
+        try:
+            conex = self.establecerConexion()
+            if conex:
+                cursor = conex.cursor()
+                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, TituloDePublicacion, Descripcion, ID_Usuario, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?)", self.datos_publicacion)
+                cursor.commit()
+                self.cerrarConexion()
+        except:
+            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            return None
     
     def datosDenuncia(self):
         return None
