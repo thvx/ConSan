@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for, session
 from bbdd import ConexionSQLServer
 import pyodbc
 import uuid
@@ -57,9 +57,9 @@ def loginUsuario():
 	SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
 	SQL.getLoginUsuario(correo, contrasena)
 	if SQL.autenticarUsuario != None:
+		# UTILIZAR SESSION AQUÍ
 		msg = 'Logeado con éxito'
-		# ABRIRLE LA PANTALLA PRINCIPAL (FALTA VER CÓMO SE HACE ESO)
-		pass
+		return redirect(url_for('registro-denuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
 	return render_template('login.html', msg)
