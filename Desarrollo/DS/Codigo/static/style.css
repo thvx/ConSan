@@ -1,3 +1,13 @@
+/* Definir variables de color */
+:root {
+    --color-1: #F1E6B2;
+    --color-2: #FABE7F;
+    --color-3: #FD7F73;
+    --color-4: #FB1E51;
+    --color-5: #3C748F;
+    --color-6: #000000;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -10,7 +20,7 @@
 header{
     display: flex;
     flex-direction: column;
-    background: #D9D9D9;
+    background: var(--color-4);
 }
 .titulo{
     padding: 25px;
@@ -18,7 +28,7 @@ header{
 }
 
 h1{
-    color: #000;
+    color: var(--color-1);
     text-align: center;
     font-size: 30px;
     font-style: normal;
@@ -26,23 +36,6 @@ h1{
     line-height: 22px; /* 55% */
     letter-spacing: -0.8px;
 }
-
-nav, #nav-opciones{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1% 3%;
-}
-
-#nav-opciones{
-    padding: 0;
-    width: 40%;
-}
-
-.nav-opcion{
-    padding: 0 5%;
-}
-
 /*----------Main----------*/
 
 /*----------Seccion 01 principal----------*/
@@ -67,7 +60,7 @@ nav, #nav-opciones{
     flex-direction: column;
     align-items: flex-start;
     flex-shrink: 0;
-    background-color: #7F878F;
+    background-color: var(--color-5);
     scroll-snap-align: start;
     overflow: hidden;
     justify-content: center;
@@ -78,10 +71,10 @@ nav, #nav-opciones{
 .titular-texto{
     max-width: 70%;
     max-height: 60%;
-    background-color: #495057;
+    background-color: var(--color-5);
     opacity: 0.6;
     padding: 2rem;
-    color: white;
+    color: var(--color-2);
     font-size: 4rem;
 }
 
@@ -99,16 +92,16 @@ nav, #nav-opciones{
     flex-direction: row;
     justify-content: space-around;
     padding: 5%;
-    background-color: #D9D9D9;
+    background-color: var(--color-3);
 }
 
 .busqueda{
     width: 100px;
     height: 30px;
     padding: 0px 16px;
-    background: #FFFFFF;
+    background: var(--color-1);
     border: none;
-    color: black;
+    color: var(--color-6);
     width: auto;
 }
 
@@ -189,7 +182,7 @@ h2{
 }
 
 .formulario-registro-denuncia{
-    background-color: #D9D9D9;
+    background-color: var(--color-1);
     margin: 3% 15%;
     padding: 2% 4%;
     width: 70%;
@@ -197,7 +190,7 @@ h2{
 
 /*----------Footer----------*/
 footer{
-    background-color: #495057;
+    background-color: var(--color-5);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
