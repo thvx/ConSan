@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-	return render_template('DS-I.html')
+	return render_template('index.html')
 
 @app.route('/registro-usuario', methods = ['GET','POST'])
 def registroUsuario():
