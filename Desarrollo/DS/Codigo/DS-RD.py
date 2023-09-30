@@ -35,7 +35,7 @@ def registroUsuario():
 		if not erroneo:
 			while not verificado:
 				ID_usuario = uuid.uuid4()
-				SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+				SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 				SQL.getUUIDUsuario(ID_usuario)
 				if SQL.encontrarUUIDUsuario() == None:
 					array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
