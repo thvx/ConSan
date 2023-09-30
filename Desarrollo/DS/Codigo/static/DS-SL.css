@@ -1,0 +1,12 @@
+form{
+    width: 80%;
+    padding: 4%;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
