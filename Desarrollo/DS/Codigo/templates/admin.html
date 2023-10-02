@@ -26,68 +26,74 @@
     </header>
     
     <main>
-        <div class="contenedor-centro">
-            <h2>Administración de denuncia</h2>
-            <form action="#" method="post" enctype="_blank">
-                <fieldset >
-                    <legend>Nuevas denuncias</legend>       
-                    <section class="contenedor-centro-listas">
-
-                        <div>
-                            <input id="search" type="search" name="denuncia">
-                            <label for="search">Buscar</label>
-                        </div>
-
-                        <div class="contenedor-centro-listas-item">
-                            <input id="check-1" type="checkbox" name="no-acepta"value="1">
-                            <label>Alias1</label>
-                            <label>Distrito</label>
-                            <label>Descripción</label>
-                            <label>Dirección</label>
-                            
-                        </div>
-                        <div class="contenedor-centro-listas-item">
-                            <input id="check-2" type="checkbox" name="no-acepta"value="2">
-                            <label>Alias1</label>
-                            <label>Distrito</label>
-                            <label>Descripción</label>
-                            <label>Dirección</label>
-                            
-                        </div>
-                        <div class="contenedor-centro-listas-item">
-                            <input id="check-3" type="checkbox" name="no-acepta"value="3">
-                            <label>Alias1</label>
-                            <label>Distrito</label>
-                            <label>Descripción</label>
-                            <label>Dirección</label>
-                        </div>
-                        <div class="contenedor-centro-listas-item">
-                            <input id="check-4" type="checkbox" name="no-acepta"value="4">
-                            <label>Alias1</label>
-                            <label>Distrito</label>
-                            <label>Descripción</label>
-                            <label>Dirección</label>
-                        </div>
-
-                        <label for="accionesMasivas"></label>
-                        <select name="accionesMasivas" id="accionesMasivas" required>
-                            <option value="accionesMasivas" selected>Aciones Masiva</option>
-                            <option value="eliminar">Eliminar</option>
-                            <option value="actualizar">Actualizar</option>
-                            <option value="publicar">Publicar</option>
-                        </select>
-    
-                        <label for="calendar">Fecha:</label>
-                        <input id="calendar" type="date" name="calendar">
-            
-                        <input type="submit"value="Aplicar">
-                        <input type="reset"value="Exportar CSV">
-                        
-                    </section>
-                    
-                </fieldset>
+        <div id="grid-area">
         
-            </form>
+            <section id="historialDenuncias" class="border">Historia de denuncias</section>
+
+            <section id="denunciasResueltas" class="border">Denuncias resueltas</section>
+
+            <section id="formulario" class="border">
+                <div >
+                    <h2>Administración de denuncia</h2>
+                    <form action="#" method="post" enctype="_blank">
+                        <fieldset >
+                            <legend>Nuevas denuncias</legend>       
+
+                                <div class="buscar">
+                                    <input id="search" type="search" name="denuncia">
+                                    <label for="search">Buscar</label>
+                                </div>
+
+                                <div class="tabla">
+                                    <div class="fila titulo">
+                                        <div class="columna">#</div>
+                                        <div class="columna">Name</div>
+                                        <div class="columna">User ID</div>
+                                        <div class="columna">Fecha</div>
+                                        <div class="columna">Categoria</div>
+                                        <div class="columna">Status</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="columna">1</div>
+                                        <div class="columna">Darlene Robertson</div>
+                                        <div class="columna">2798</div>
+                                        <div class="columna">02/07/1971</div>
+                                        <div class="columna">Limpieza pública</div>
+                                        <div class="columna">Active</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="columna">2</div>
+                                        <div class="columna">Ronald Richards</div>
+                                        <div class="columna">4600</div>
+                                        <div class="columna">28/03/1968</div>
+                                        <div class="columna">Seguridad pública</div>
+                                        <div class="columna">Inactive</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="columna">3</div>
+                                        <div class="columna">Jerome Bell</div>
+                                        <div class="columna">4846</div>
+                                        <div class="columna">12/08/1994</div>
+                                        <div class="columna">Reporte de incidente</div>
+                                        <div class="columna">Active</div>
+                                    </div>
+                                    <div class="fila">
+                                        <div class="columna">4</div>
+                                        <div class="columna">Robert Fox</div>
+                                        <div class="columna">9151</div>
+                                        <div class="columna">02/01/1980</div>
+                                        <div class="columna">Seguridad pública</div>
+                                        <div class="columna">Disabled</div>
+                                    </div>
+                                </div>
+                                
+                            
+                            
+                        </fieldset>
+                
+                    </form>
+                </div>
+            </section>
         </div>
     </main>
 

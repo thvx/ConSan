@@ -195,6 +195,65 @@ h2{
     width: 70%;
 }
 
+/*----------Administración-----------*/
+.formulario-admin{
+    width: 80%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+} 
+.buscar{
+    text-align: right;
+    flex-direction: row;
+    border-radius: 3px;
+    justify-content:space-around;
+    margin: 10px;
+}
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+.fila {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+.titulo {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+.columna {
+    flex: 1;
+    padding: 2px;
+}
+#grid-area {
+    display: grid;
+    grid-template-areas: 
+    "nav historialDenuncias denunciasResueltas"
+    "nav formulario formulario";
+
+    grid-template-rows:  1fr 1fr ;
+    grid-template-columns:  auto auto;
+    height: 120vh;
+    grid-gap: 10px;
+}
+section#historialDenuncias {
+    grid-area: historialDenuncias;
+}
+section#denunciasResueltas {
+    grid-area: denunciasResueltas;
+}
+section#formulario {
+    grid-area: formulario;
+}
+.border {
+    background-color: rgb(240, 240, 240);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 6px;
+}
+
 /*----------Footer----------*/
 footer{
     background-color: #495057;
