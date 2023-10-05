@@ -47,7 +47,7 @@ def registroUsuario():
 			msg = 'Los datos no pueden ser numéricos'
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('DS-L.html', msg)
+	return render_template('login.html', msg)
 
 @app.route('/login')
 def loginUsuario():
@@ -72,7 +72,7 @@ def loginUsuario():
 		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
-	return render_template('DS-L.html', msg)
+	return render_template('login.html', msg)
 
 @app.route('/logout')
 def cerrarSesion():
