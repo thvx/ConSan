@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from bbdd import ConexionSQLServer
+from consultas.consulta import ConexionSQLServer
 import uuid
 from datetime import datetime
 
@@ -15,16 +15,16 @@ def registroUsuario():
 	msg = ''
 	erroneo = False
 	if request.method == 'POST':
-		nombre = request.form['nombre']
+		nombre = request.form['nombres']
 		apellidos = request.form['apellidos']
-		DNI = request.form['DNI']
+		DNI = request.form['numero-documento']
 		usuario = request.form['usuario']
 		contrasena = request.form['contrasena']
 		correo = request.form['correo']
 		direccion = request.form['direccion']
-		num_celular = request.form['num_celular']
+		num_celular = request.form['celular']
 		administrador = 0 
-		foto_perfil = request.form['foto_perfil'] # DEBE SER OPCIONAL
+		foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
 		fecha_creac = datetime.now()
 		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
 		datos_esenciales = (nombre, apellidos)
@@ -47,14 +47,14 @@ def registroUsuario():
 			msg = 'Los datos no pueden ser numéricos'
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('registro.html', msg)
+	return render_template('login.html', msg)
 
 @app.route('/login')
 def loginUsuario():
 	msg = ''
 	correo = request.form['correo']
 	contrasena = request.form['contrasena']
-	SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+	SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 	SQL.getLoginUsuario(correo, contrasena)
 	if SQL.autenticarUsuario != None:
 		datos_usuario = SQL.devolverUsuario()
@@ -94,7 +94,7 @@ def registroDenuncia():
 		URL_imagen = request.form['URL_imagen'] # FALTA ACORDAR CUANDO SON VARIAS IMAGENES
 		while not verificado:
 			ID_publicacion = uuid.uuid4()
-			SQL = ConexionSQLServer(servidor, base_de_datos, nombre_usuario, contra)
+			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 			SQL.getUUIDPublicacion(ID_publicacion)
 			if SQL.encontrarUUIDPublicacion() == None:
 				array = (ID_publicacion, titulo, descripcion, ID_usuario, fecha_creac, relevancia)
