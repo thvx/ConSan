@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from consultas.consulta import ConexionSQLServer
+from clases.consulta import ConexionSQLServer
+from clases.user import User
 import uuid
 from datetime import datetime
 
@@ -69,6 +70,7 @@ def loginUsuario():
 		session['admin'] = datos_usuario[9]
 		session['foto_perfil'] = datos_usuario[10]
 		msg = 'Logeado con éxito'
+		# INICIAR AUTENTICACION CON FLASK LOGIN
 		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
