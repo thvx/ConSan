@@ -116,7 +116,7 @@ def seguimientoDenuncia():
 	# ******************************************************************************************************
 	# Aquí se debe buscar la ID en la BBDD y si está se prosigue con la muestra de datos
 	# ******************************************************************************************************
-	return render_template('buscarRegistro.html', msg)
+	return render_template('seguimientoDenuncia.html', msg) 
 
 if __name__ == '__main__':
 	app.run(debug = True)
