@@ -10,7 +10,7 @@ app = Flask(__name__)
 def inicio():
 	return render_template('index.html')
 
-@app.route('/registro-usuario', methods = ['GET','POST'])
+@app.route('/registro-usuario/', methods = ['GET','POST'])
 def registroUsuario():
 	verificado = False
 	msg = ''
@@ -50,7 +50,7 @@ def registroUsuario():
 		msg = 'Método HTTP incorrecto'
 	return render_template('login.html', msg)
 
-@app.route('/login')
+@app.route('/login/')
 def loginUsuario():
 	msg = ''
 	correo = request.form['correo']
@@ -76,12 +76,12 @@ def loginUsuario():
 		msg = 'Correo o contraseña incorrectos'
 	return render_template('login.html', msg)
 
-@app.route('/logout')
+@app.route('/logout/')
 def cerrarSesion():
 	session.clear()
 	return redirect(url_for('inicio'))
 
-@app.route('/registro-denuncia', methods = ['GET', 'POST'])
+@app.route('/registro-denuncia/', methods = ['GET', 'POST'])
 def registroDenuncia():
 	msg = ''
 	verificado = False
@@ -109,7 +109,7 @@ def registroDenuncia():
 		msg = 'Método HTTP incorrecto'
 	return render_template('registrarDenuncia.html', msg)
 
-@app.route('/seguimiento-denuncia', methods = ['GET', 'POST'])
+@app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
 	msg = ''
 	ID_publicacion = request.form['ID_publicacion']
