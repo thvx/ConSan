@@ -15,14 +15,16 @@
         <section class="titulo">
             <h1>DenunciaSeguro | Plataforma de Denuncias Ciudadanas</h1>
         </section>
-        <nav>
-            <div id="nav-opciones">
-                <a class = "nav-opcion" href="{{url_for('inicio')}}">Inicio</a>
-                <a class = "nav-opcion" href="{{url_for('registroDenuncia')}}">Registrar Denuncia</a>
-                <a class = "nav-opcion" href="{{url_for('seguimientoDenuncia')}}">Búsqueda por archivo</a>                
-            </div id="nav-opciones">
-                <a class = "nav-opcion" href="{{url_for('loginUsuario')}}">Iniciar Sesión</a>
-                <a class = "nav-opcion" href="{{url_for('registroUsuario')}}">Registrar Usuario</a>
+        <nav class="barra-nav">
+            <ul class="grupo1 nav nav-underline">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('inicio')}}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for('registroDenuncia')}}">Registrar Denuncia</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for('seguimientoDenuncia')}}">Búsqueda por archivo</a></li>
+            </ul>
+            <ul class="grupo2 nav nav-underline">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url_for('loginUsuario')}}">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for('registroUsuario')}}">Registrar Usuario</li>
+            </ul>
         </nav>
     </header>
     

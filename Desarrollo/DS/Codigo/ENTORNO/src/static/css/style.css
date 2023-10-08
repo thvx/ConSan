@@ -12,6 +12,7 @@ header{
     flex-direction: column;
     background: #D9D9D9;
 }
+
 .titulo{
     padding: 25px;
     text-align: center;
@@ -27,22 +28,20 @@ h1{
     letter-spacing: -0.8px;
 }
 
-nav, #nav-opciones{
+.barra-nav{
+    justify-content: space-between;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 1% 3%;
+    padding: 5px 30px;
 }
 
-#nav-opciones{
-    padding: 0;
-    width: 40%;
+.grupo1{
+    justify-content: flex-start;
 }
 
-.nav-opcion{
-    padding: 0 5%;
+.grupo1{
+    justify-content: flex-end;
 }
-
 /*----------Main----------*/
 
 /*----------Seccion 01 principal----------*/
@@ -211,4 +210,13 @@ footer{
     display: flex;
     flex-direction: row;
     gap: 15px;
+}
+
+*/----------Media Queries----------*/
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .copyright-grupo{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
 }
