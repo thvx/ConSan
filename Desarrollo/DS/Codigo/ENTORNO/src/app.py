@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from DS_BD import ConexionSQLServer
+from clases.consulta import ConexionSQLServer
+from clases.user import User
 import uuid
 from datetime import datetime
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 def inicio():
 	return render_template('index.html')
 
-@app.route('/registro-usuario', methods = ['GET','POST'])
+@app.route('/registro-usuario/', methods = ['GET','POST'])
 def registroUsuario():
 	verificado = False
 	msg = ''
@@ -47,9 +48,9 @@ def registroUsuario():
 			msg = 'Los datos no pueden ser numéricos'
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('DS-L.html', msg)
+	return render_template('login.html', msg)
 
-@app.route('/login')
+@app.route('/login/')
 def loginUsuario():
 	msg = ''
 	correo = request.form['correo']
@@ -69,17 +70,18 @@ def loginUsuario():
 		session['admin'] = datos_usuario[9]
 		session['foto_perfil'] = datos_usuario[10]
 		msg = 'Logeado con éxito'
+		# INICIAR AUTENTICACION CON FLASK LOGIN
 		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
-	return render_template('DS-L.html', msg)
+	return render_template('login.html', msg)
 
-@app.route('/logout')
+@app.route('/logout/')
 def cerrarSesion():
 	session.clear()
 	return redirect(url_for('inicio'))
 
-@app.route('/registro-denuncia', methods = ['GET', 'POST'])
+@app.route('/registro-denuncia/', methods = ['GET', 'POST'])
 def registroDenuncia():
 	msg = ''
 	verificado = False
@@ -107,14 +109,14 @@ def registroDenuncia():
 		msg = 'Método HTTP incorrecto'
 	return render_template('registrarDenuncia.html', msg)
 
-@app.route('/seguimiento-denuncia', methods = ['GET', 'POST'])
+@app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
 	msg = ''
 	ID_publicacion = request.form['ID_publicacion']
 	# ******************************************************************************************************
 	# Aquí se debe buscar la ID en la BBDD y si está se prosigue con la muestra de datos
 	# ******************************************************************************************************
-	return render_template('buscarRegistro.html', msg)
+	return render_template('seguimientoDenuncia.html', msg) 
 
 if __name__ == '__main__':
 	app.run(debug = True)
