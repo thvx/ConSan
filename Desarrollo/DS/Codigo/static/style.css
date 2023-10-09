@@ -197,7 +197,7 @@ h2{
 
 /*----------Administración-----------*/
 .formulario-admin{
-    width: 80%;
+    width: 100%;
     height: 100%; 
     display: flex;
     flex-direction: column;
@@ -205,7 +205,7 @@ h2{
 .buscar{
     text-align: right;
     flex-direction: row;
-    border-radius: 3px;
+    border-radius: 10px;
     justify-content:space-around;
     margin: 10px;
 }
@@ -222,6 +222,9 @@ h2{
 .titulo {
     font-weight: bold;
     background-color: #f2f2f2;
+    text-align: left;
+    
+    
 }
 .columna {
     flex: 1;
@@ -233,10 +236,11 @@ h2{
     "nav historialDenuncias denunciasResueltas"
     "nav formulario formulario";
 
-    grid-template-rows:  1fr 1fr ;
-    grid-template-columns:  auto auto;
-    height: 120vh;
+    grid-template-rows:  0.5fr 0.5fr;
+    grid-template-columns:  auto ;
+    height: 100%;
     grid-gap: 10px;
+    /* justify-content:center */
 }
 section#historialDenuncias {
     grid-area: historialDenuncias;
@@ -253,6 +257,35 @@ section#formulario {
     margin: 5px;
     border-radius: 6px;
 }
+.boton {
+    display: inline-block;
+    padding: 10px 20px; /* Ajusta el padding según tus preferencias */
+    width: 120px; /* Ancho del botón */
+    height: 40px; /* Altura del botón */
+    color: #fff; /* Cambia el color del texto según tu preferencia */
+    border: 1px solid #000000; /* Agrega un borde */
+    border-radius: 5px; /* Añade esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Agrega transiciones suaves al color de fondo y al color del texto */
+  }
+  .boton.active {
+    background-color: #151618; /* Fondo blanco para el estado activo */
+    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+  }
+  .boton.inactive {
+    background-color: #c2b9b7; /* Fondo blanco para el estado activo */
+    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+  }
+  .boton.disabled {
+    background-color: #ff0000; /* Fondo blanco para el estado activo */
+    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+  }
+  .boton:hover {
+    background-color: #000000; /* Cambia el color de fondo en el hover */
+    color: #fff; /* Cambia el color del texto en el hover */
+  }
+  
 
 /*----------Footer----------*/
 footer{
