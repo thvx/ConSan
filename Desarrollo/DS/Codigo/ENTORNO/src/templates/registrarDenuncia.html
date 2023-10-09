@@ -3,7 +3,95 @@
 {% block title %}Registrar Denuncia{% endblock %}
 
 {% block content %}
-        <section class="section-formulario-denuncia">
+        <section class="section-elegir-denuncia" id="seccion1" style="display: flex; flex-direction: column;">
+            <h2>Nueva denuncia</h2>
+            <form class="formulario-elegir-denuncia" action="/registrar-denuncia" method="POST">
+                <p class="formulario-descripcion">Selecciona el/los ícono(s) que más se aproxime(n) al hecho o falta que quieras reportar</p>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="1">
+                                <img class="icon-prueba" src="..\static\images\person-slash.svg" alt="Ícono 01">
+                                <h5 class="labelMotivo">Discriminación</h5>
+                                <p class="descripcionMotivo">Denuncias de discriminación racial, religiosa, de género u orientación sexual.</p>
+                            </label>
+                        </div>                        
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="2">
+                                <img class="icon-prueba" src="..\static\images\cash-coin.svg" alt="Ícono 02">
+                                <h5 class="labelMotivo">Corrupción</h5>
+                                <p class="descripcionMotivo">Actos ilegales, sobornos o abuso de poder para beneficio personal</p>
+                            </label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="3">
+                                <img class="icon-prueba" src="..\static\images\equilibrio.png" alt="Ícono 03">
+                                <h5 class="labelMotivo">Abuso de poder</h5>
+                                <p class="descripcionMotivo">Uso indebido de la autoridad para dañar a otros o beneficio propio</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="4">
+                                <img class="icon-prueba" src="..\static\images\chat-dots.svg" alt="Ícono 04">
+                                <h5 class="labelMotivo">Difamación</h5>
+                                <p class="descripcionMotivo">Divulgación de información falsa para dañar la reputación de alguien</p>
+                            </label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="5">
+                                <img class="icon-prueba" src="..\static\images\person-fill-exclamation.svg" alt="Ícono 05">
+                                <h5 class="labelMotivo">Acoso</h5>
+                                <p class="descripcionMotivo">Persecución persistente que causa incomodidad o temor</p>
+                            </label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="6">
+                                <img class="icon-prueba" src="..\static\images\shield-lock.svg" alt="Ícono 06">
+                                <h5 class="labelMotivo">Seguridad Ciudadana</h5>
+                                <p class="descripcionMotivo">Denuncias sobre la seguridad en la comunidad, delitos, robos, vandalismo, etc.</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="7">
+                                <img class="icon-prueba" src="..\static\images\tap.svg"  alt="Ícono 07">
+                                <h5 class="labelMotivo">Servicios Públicos</h5>
+                                <p class="descripcionMotivo"> Denuncias relacionadas con servicios públicos como agua, electricidad, alcantarillado, etc.</p>
+                            </label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="8">
+                                <img class="icon-prueba" src="..\static\images\terapia-animal.png" alt="Ícono 08">
+                                <h5 class="labelMotivo">Protección Animal</h5>
+                                <p class="descripcionMotivo">Denuncias de abuso animal, negligencia o maltrato hacia los animales</p>
+                            </label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label class="boton-01">
+                                <input type="checkbox" class="motivos" name="categoria" value="9">
+                                <img class="icon-prueba" src="..\static\images\archive.svg" alt="Ícono 09">
+                                <h5 class="labelMotivo">Otros</h5>
+                                <p class="descripcionMotivo">Cualquier otro motivo que no se ajuste a las categorías anteriores</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <a id="iniciar-denuncia" class="btn btn-primary btn-lg">Continuar</a>
+            </form>
+        </section>
+
+        <section class="section-formulario-denuncia" id="seccion2" style="display: none; flex-direction: column;">
             <h2>Ingresa tu denuncia</h2>
             <div class="indicador-numero">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="grey" class="bi bi-1-circle-fill" viewBox="0 0 16 16">
@@ -13,33 +101,119 @@
                     <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z" />
                 </svg>
             </div>
-            <form id="formulario-registro-denuncia" action="/registrar-denuncia" method="POST">
+            <form class="formulario-registro-denuncia" action="/registrar-denuncia" method="POST">
                 <p class="formulario-descripcion">Esta plataforma tiene como objetivo constituir un mecanismo ágil y moderno mediante el cual la ciudadanía pueda presentar denuncias por faltas cometidas que perjudiquen a la comunidad</p>
                 <div class="mb-3">
-                    <label for="categoria-denuncia" class="form-label">Categoría de denuncia</label>
-                    <select name="categoria-denuncia" id="categoria-denuncia" class="form-control" required>
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="opcion1">opcion1</option>
-                        <option value="opcion2">opcion2</option>
-                        <option value="opcion3">opcion3</option>
-                    </select>
+                    <label for="fechaHechos" class="form-label">Fecha de los hechos</label>
+                    <input type="date" class="form-control" id="fechaHechos" name="fechaHechos">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Descripción de los acontecimientos</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Describa los acontecimientos ocurridos de la manera más detallada posible " rows="3"></textarea>
+                    <label for="descripcionHechos" class="form-label">Descripción de los acontecimientos</label>
+                    <textarea class="form-control" id="descripcionHechos" placeholder="Describa los acontecimientos ocurridos de la manera más detallada posible " rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <input class="form-control" type="file" id="formFile">
+                    <label for="archivosHechos" class="form-label">Insertar información audiovisual adicional</label>
+                    <input class="form-control" type="file" id="archivosHechos" multiple>
                 </div>
-                <a id="continuar-denuncia" class="btn btn-primary btn-lg" href="{{url_for('loginUsuario')}}">Continuar</a>
+                <a id="continuar-denuncia" class="btn btn-primary btn-lg">Continuar</a>
             </form>
         </section>
 
-        <section class="section-formulario-compartir d-none">
-            <form id="form-compartir-denuncia" action="/compartir-denuncia" method="POST">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile">
+        <section class="section-formulario-compartir" id="seccion3" style="display: none; flex-direction: column;">
+            <h2>Finaliza tu denuncia</h2>
+            <div class="indicador-numero">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="grey" class="bi bi-2-circle" viewBox="0 0 16 16">
+                    <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="grey" class="bi bi-2-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24c0-.691.493-1.306 1.336-1.306.756 0 1.313.492 1.313 1.236 0 .697-.469 1.23-.902 1.705l-2.971 3.293V12h5.344v-1.107H7.268v-.077l1.974-2.22.096-.107c.688-.763 1.287-1.428 1.287-2.43 0-1.266-1.031-2.215-2.613-2.215-1.758 0-2.637 1.19-2.637 2.402v.065h1.271v-.07Z"/>
+                </svg>
+            </div>
+            <form class="formulario-compartir-denuncia" action="/compartir-denuncia" method="POST">
+                <div class="mb-3">
+                    <p>¿Deseas realizar la denuncia de forma anónima?</p>
+                    <label>
+                        <input type="checkbox" id="denunciaAnonima"> Sí, continuar de forma anónima
+                    </label>
+                </div>
+                
+                <div id="correoElectronico" style="display: none;">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" class="form-control">
+                </div>
+                <a id="finalizar-denuncia" class="btn btn-primary btn-lg" href="{{url_for('loginUsuario')}}">Continuar</a>
             </form>
         </section>
+
+        <script>
+            //Funcion para cambiar de página
+            document.addEventListener("DOMContentLoaded", function() {
+                const botonContinuar = document.getElementById("iniciar-denuncia");
+                const seccion1 = document.getElementById("seccion1");
+                const seccion2 = document.getElementById("seccion2");
+                const seccion3 = document.getElementById("seccion3");
+        
+                botonContinuar.addEventListener("click", function(event) {
+                    // Evita la acción de envío de formulario predeterminada
+                    event.preventDefault();
+                    seccion1.style.display = "none";
+                    seccion2.style.display = "flex";
+                });
+        
+                const botonContinuarDenuncia = document.getElementById("continuar-denuncia");
+                botonContinuarDenuncia.addEventListener("click", function(event) {
+                    // Evita la acción de envío de formulario predeterminada
+                    event.preventDefault();
+                    seccion2.style.display = "none";
+                    seccion3.style.display = "flex";
+                });
+            });
+        
+            //Función para almacenar los eventos de ckeckbox
+            document.addEventListener("DOMContentLoaded", function () {
+                const checkboxes = document.querySelectorAll(".motivos");
+                const botones = document.querySelectorAll(".boton-01");
+
+                botones.forEach((boton, index) => {
+                    boton.addEventListener("click", function () {
+                        // Cambia el estado del checkbox cuando se hace clic en el recuadro
+                        checkboxes[index].checked = !checkboxes[index].checked;
+
+                        // Agrega o elimina la clase 'clicked' para cambiar el borde a rojo
+                        if (checkboxes[index].checked) {
+                            boton.classList.add("clicked");
+                        } else {
+                            boton.classList.remove("clicked");
+                        }
+                    });
+                });
+            });
+
+            //Función para redireccionar al login
+            document.addEventListener("DOMContentLoaded", function() {
+                const denunciaAnonimaCheckbox = document.getElementById("denunciaAnonima");
+                const correoElectronicoDiv = document.getElementById("correoElectronico");
+                const emailInput = document.getElementById("email");
+                const finalizarDenunciaButton = document.getElementById("finalizar-denuncia");
+
+                denunciaAnonimaCheckbox.addEventListener("change", function() {
+                    if (denunciaAnonimaCheckbox.checked) {
+                        correoElectronicoDiv.style.display = "flex";
+                    } else {
+                        correoElectronicoDiv.style.display = "none";
+                        emailInput.value = "";
+                    }
+                });
+
+                finalizarDenunciaButton.addEventListener("click", function() {
+                    if (denunciaAnonimaCheckbox.checked) {
+                        // Si se selecciona denuncia anónima, valida el correo electrónico aquí si es necesario
+                        // Luego envía el formulario
+                    } else {
+                        // Si no se selecciona denuncia anónima, redirige al usuario a la página de inicio de sesión
+                        window.location.href = "..\templates\inicioSesion.html";
+                    }
+                });
+            });
+        </script>
 {% endblock %}
