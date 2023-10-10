@@ -19,6 +19,7 @@ def registroUsuario():
 	erroneo = False
 	nombre = request.form.get('nombre', False)
 	apellidos = request.form.get('apellidos', False)
+	tipo_documento = request.form('tipo-documento', False)
 	DNI = request.form.get('numero-documento', False)
 	contrasena = request.form.get('contrasena', False)
 	correo = request.form.get('correo', False)
