@@ -9,7 +9,7 @@ class ConexionSQLServer:
     def establecerConexion(self):
         try:
             # Establece la conexión
-            self.conex = pyodbc.connect(f'DRIVER={{SQL Server}};'f'SERVER={self.server};'f'DATABASE={self.database}; Trusted_Connection=yes;')
+            self.conex = pyodbc.connect('DRIVER={SQL Server};'f'SERVER={self.server};'f'DATABASE={self.database}; Trusted_Connection=yes;')
             return self.conn
         except Exception as e:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")

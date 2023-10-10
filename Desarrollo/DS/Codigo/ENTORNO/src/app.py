@@ -5,6 +5,8 @@ import uuid
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route('/')
 def inicio():
@@ -15,51 +17,53 @@ def registroUsuario():
 	verificado = False
 	msg = ''
 	erroneo = False
-	if request.method == 'POST':
-		nombre = request.form['nombres']
-		apellidos = request.form['apellidos']
-		DNI = request.form['numero-documento']
-		usuario = request.form['usuario']
-		contrasena = request.form['contrasena']
-		correo = request.form['correo']
-		direccion = request.form['direccion']
-		num_celular = request.form['celular']
-		administrador = 0 
-		foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
-		fecha_creac = datetime.now()
-		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
-		datos_esenciales = (nombre, apellidos)
-		for dato_esencial in datos_esenciales:
-			if dato_esencial.isdigit():
-				erroneo = True
-			
-		if not erroneo:
-			while not verificado:
-				ID_usuario = uuid.uuid4()
-				SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
-				SQL.getUUIDUsuario(ID_usuario)
-				if SQL.encontrarUUIDUsuario() == None:
-					array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
-					SQL.getDatosUsuario(array)
-					SQL.insertarUsuario()
-					msg = 'Registro con éxito'
-					verificado = True
-		else:
-			msg = 'Los datos no pueden ser numéricos'
+	nombre = request.form.get('nombre', False)
+	apellidos = request.form.get('apellidos', False)
+	DNI = request.form.get('numero-documento', False)
+	contrasena = request.form.get('contrasena', False)
+	correo = request.form.get('correo', False)
+	direccion = request.form.get('direccion', False)
+	num_celular = request.form.get('num_celular', False)
+	administrador = 0 
+	foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
+	fecha_creac = datetime.now()
+	fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
+	datos_esenciales = (nombre, apellidos)
+	for dato_esencial in datos_esenciales:
+		if dato_esencial.isdigit():
+			erroneo = True
+	
+	if not erroneo:
+		while not verificado:
+			ID_usuario = uuid.uuid4()
+			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+			SQL.getUUIDUsuario(ID_usuario)
+			if SQL.encontrarUUIDUsuario() == None:
+				array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
+				SQL.getDatosUsuario(array)
+				SQL.insertarUsuario()
+				msg = 'Registro con éxito'
+				verificado = True
 	else:
-		msg = 'Método HTTP incorrecto'
-	return render_template('registroUsuario.html', msg)
+		msg = 'Los datos no pueden ser numéricos'
+	return render_template('registroUsuario.html')
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET', 'POST'])
 def loginUsuario():
 	msg = ''
-	correo = request.form['correo']
-	contrasena = request.form['contrasena']
+	#correo = request.form['correo']
+	#contrasena = request.form['contrasena']
+	correo = request.form.get('correo', False)
+	contrasena = request.form.get('contrasena', False)
+	print(correo)
+	print(contrasena)
+	'''
 	SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 	SQL.getLoginUsuario(correo, contrasena)
-	if SQL.autenticarUsuario != None:
+	if SQL.autenticarUsuario is not None:
 		datos_usuario = SQL.devolverUsuario()
-		session['ID_usuario'] = datos_usuario[0] 
+		session['ID_usuario'] = datos_usuario[0]
+		session['ID_usuario'] = correo
 		session['nombre'] = datos_usuario[1] 
 		session['apellido'] = datos_usuario[2] 
 		session['DNI'] = datos_usuario[3]
@@ -74,7 +78,8 @@ def loginUsuario():
 		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
-	return render_template('inicioSesion.html', msg)
+	'''
+	return render_template('inicioSesion.html')
 
 @app.route('/logout/')
 def cerrarSesion():
