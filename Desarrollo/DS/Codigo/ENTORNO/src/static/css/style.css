@@ -4,93 +4,58 @@
     font-family: Inter, sans-serif;
     box-sizing: border-box;
     font-size: 16px;
+    --color01: #D9D9D9;
+    --color02: black;
+    --color03: #495057;
 }
 
 /*----------Header----------*/
 header{
     display: flex;
     flex-direction: column;
-    background: #D9D9D9;
+    background: var(--color01);
 }
+
 .titulo{
-    padding: 25px;
+    padding: 2%;
     text-align: center;
 }
 
 h1{
-    color: #000;
+    color: var(--color02);
     text-align: center;
-    font-size: 30px;
-    font-style: normal;
+    font-size: 2rem;
     font-weight: 500;
-    line-height: 22px; /* 55% */
+    line-height: 22px;
     letter-spacing: -0.8px;
 }
 
-nav, #nav-opciones{
+.barra-nav {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    padding: 1% 3%;
+    padding: 0 3%;
 }
 
-#nav-opciones{
-    padding: 0;
-    width: 40%;
+.grupo2 {
+    margin-left: auto;
 }
-
-.nav-opcion{
-    padding: 0 5%;
-}
-
-/*----------Main----------*/
+/*---------- Index----------*/
 
 /*----------Seccion 01 principal----------*/
 .seccion-01{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 5%;
-}
-
-.container-cards{
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: mandatory;
-}
-
-.card-a{
-    display: flex;
-    width: 100%;
-    height: 65vh;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 0;
-    background-color: #7F878F;
-    scroll-snap-align: start;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.titular-texto{
-    max-width: 70%;
-    max-height: 60%;
-    background-color: #495057;
-    opacity: 0.6;
-    padding: 2rem;
-    color: white;
-    font-size: 4rem;
 }
 
 .botones{
     display: flex;
     flex-direction: row;
-    margin: 40px;
+    padding: 4rem;
+    padding-bottom: 6rem;
     gap: 5%;
     justify-content: center;
+    background: linear-gradient(to bottom, white, var(--color01));
 }
 
 /*----------Sección 02 principal----------*/
@@ -98,22 +63,62 @@ nav, #nav-opciones{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 5%;
-    background-color: #D9D9D9;
+    padding: 4%;
+    background-color: var(--color01)
 }
 
-.busqueda{
-    width: 100px;
-    height: 30px;
+.mapa{
+    width: 40vw;
+    height: 60vh;
+    background-color: grey;
+}
+
+.busqueda-noticias{
     padding: 0px 16px;
-    background: #FFFFFF;
-    border: none;
-    color: black;
-    width: auto;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-form{
-    margin-bottom: 15%;
+.d-flex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+/*----------Sección 03 principal----------*/
+.seccion-03{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 4%;
+    gap: 2.5rem;
+    background-color: var(--color01)
+}
+
+.container-principal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.element{
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.icon-prueba{
+    width: 3rem;
+    height: 3rem;
+    align-self: center;
+    padding-bottom: 3%;
 }
 
 /*----------Login-----------*/
@@ -124,11 +129,6 @@ form{
     justify-content: center;
     align-items: center;
     gap: 20px;
-}
-
-form{
-    width: 80%;
-    padding: 4%;
 }
 
 .formulario-registro .formulario-inicio-sesion{
@@ -175,9 +175,10 @@ form .btn{
 }
 
 /*----------Registro de denuncias --------*/
+
 h2{
     text-align: center;
-    padding-top: 20px;
+    padding-top: 2rem;
 }
 
 .indicador-numero{
@@ -188,16 +189,63 @@ h2{
     gap: 30px;
 }
 
-.formulario-registro-denuncia{
-    background-color: #D9D9D9;
-    margin: 3% 15%;
-    padding: 2% 4%;
-    width: 70%;
+#seccion1, .formulario-elegir-denuncia,
+#seccion2, .formulario-registro-denuncia,
+#seccion3, .formulario-compartir-denuncia{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.formulario-elegir-denuncia,
+.formulario-registro-denuncia,
+.formulario-compartir-denuncia{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 70vw;
+}
+
+.row{
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+}
+
+.col-6 p, .formulario-registro-denuncia{
+    text-align:justify;
+    padding: 5%;
+}
+
+.motivos {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.boton-01.clicked {
+    border: 2px solid red;
+    border-radius: 8px; 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    transform: translateY(2px); 
+}
+
+.boton-01{
+    padding: 5%;
+}
+
+.mb-3{
+    width: 100%;
+}
+
+#seccion3{
+    min-height: 70vh;
 }
 
 /*----------Footer----------*/
 footer{
-    background-color: #495057;
+    background-color: var(--color03);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

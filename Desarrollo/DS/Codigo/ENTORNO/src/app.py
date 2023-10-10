@@ -48,7 +48,7 @@ def registroUsuario():
 			msg = 'Los datos no pueden ser numéricos'
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('login.html', msg)
+	return render_template('registroUsuario.html', msg)
 
 @app.route('/login/')
 def loginUsuario():
@@ -74,7 +74,7 @@ def loginUsuario():
 		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
 	else:
 		msg = 'Correo o contraseña incorrectos'
-	return render_template('login.html', msg)
+	return render_template('inicioSesion.html', msg)
 
 @app.route('/logout/')
 def cerrarSesion():
@@ -107,7 +107,7 @@ def registroDenuncia():
 		# FALTA INSERTAR IMAGENES EN LA TABLA
 	else:
 		msg = 'Método HTTP incorrecto'
-	return render_template('registrarDenuncia.html', msg)
+	return render_template('registrarDenuncia.html')
 
 @app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
