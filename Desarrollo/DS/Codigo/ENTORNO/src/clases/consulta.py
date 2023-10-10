@@ -27,7 +27,7 @@ class ConexionSQLServer:
             conex = self.establecerConexion()
             if conex:
                 cursor = conex.cursor()
-                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, DNI, NombreDeUsuario, Contrasena, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
+                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, TipoDocumento, NDocumento, NombreDeUsuario, Contrasena, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
                 cursor.commit()
                 self.cerrarConexion()
         except:

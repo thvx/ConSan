@@ -20,7 +20,8 @@ def registroUsuario():
 	nombre = request.form.get('nombre', False)
 	apellidos = request.form.get('apellidos', False)
 	tipo_documento = request.form('tipo-documento', False)
-	DNI = request.form.get('numero-documento', False)
+	num_doc = request.form.get('numero-documento', False)
+	usuario = request.form.get('', False)
 	contrasena = request.form.get('contrasena', False)
 	correo = request.form.get('correo', False)
 	direccion = request.form.get('direccion', False)
@@ -40,7 +41,7 @@ def registroUsuario():
 			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 			SQL.getUUIDUsuario(ID_usuario)
 			if SQL.encontrarUUIDUsuario() == None:
-				array = (ID_usuario, nombre, apellidos, DNI, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
+				array = (ID_usuario, nombre, apellidos, tipo_documento, num_doc, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
 				SQL.getDatosUsuario(array)
 				SQL.insertarUsuario()
 				msg = 'Registro con éxito'
