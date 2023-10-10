@@ -50,17 +50,43 @@
   </section>
   
   <section class="seccion-02">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.8162889620476!2d-77.08709452502265!3d-12.056157788181407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c946680d0099%3A0xc6def8804064a4e9!2sUniversidad%20Nacional%20Mayor%20de%20San%20Marcos!5e0!3m2!1ses!2spe!4v1694589292406!5m2!1ses!2spe" 
-      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <aside class="busqueda-noticias">
-          <form class="d-flex" role="search" action="#" method="post" target="_blank">
-              <input class="form-control me-2" name="busquedalocalidad" type="search" placeholder="Inserte una localidad" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
+    <aside class="mapa">
+
+    </aside>
+    <aside class="busqueda-noticias">
+        <form class="d-flex" role="search" action="#" method="post" target="_blank">
+            <input class="form-control me-2" name="busquedalocalidad" type="search" placeholder="Inserte una localidad" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+        <div class = "bloque-noticias">
           <h2>Lista de denuncias cercanas</h2>
           <p>Nombre / Descripción de la denuncia</p>
           <p>Estado de la denuncia</p>
-      </aside>
+        </div>
+    </aside>
+  </section>
+
+  <section class="seccion-03">
+    <h2>Tipos de prueba que reforzarán tu denuncia</h2>
+    <div class="container-principal">
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\camera.svg">
+        <p>Fotografías, audio o video</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\file-earmark-text.svg">
+        <p>Documentación en papel</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\search.svg">
+        <p>Información detallada</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\eye.svg">
+        <p>Declaración de Testigos</p>
+      </div>
+    </div>
+    <a href="{{url_for('registroDenuncia')}}" class="btn btn-primary btn-lg" id="boton">Inicia tu denuncia</a>
   </section>
   <script src="cliente.js"></script>
 {% endblock %}
