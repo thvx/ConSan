@@ -8,6 +8,9 @@
                 
                 <div class="row">
                     <h2>Crear una cuenta</h2>
+                    <label for="nombre-usuario" class="form-label">Nombre de usuario</label>
+                        <input type="text" name= "nombre-usuario" id="nombre-usuario" class="form-control" placeholder="Ingrese un usuario valido" required>
+
                     <div class="col">
                         <label for="tipo-documento" class="form-label">Tipo de documento</label>
                         <select name="tipo-documento" id="tipo-documento" class="form-control" required> 
@@ -25,9 +28,6 @@
 
                         <label for="contrasena" class="form-label">Contraseña</label>
                         <input type="password" name="contrasena" id="contrasena" class="form-control" required>
-
-                        <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" name="direccion" id="direccion" class="form-control" required>
 
                         <input type="checkbox" name="terminos-condiciones" id="terminos-condiciones" class="form-check-label" required>
                         <label for="terminos-condiciones" class="form-label">Acepto los términos y condiciones</label>                    
