@@ -14,7 +14,6 @@ CREATE TABLE Usuario (
     NombreDeUsuario VARCHAR(35) UNIQUE,
     Contrasena VARCHAR(20),
     Correo VARCHAR(255),
-    Direccion VARCHAR(255),
     NumeroDeCelular VARCHAR(9),
     Administrador BIT,  -- Campo que indica si el usuario es administrador (true=1/false=0)
     FotoPerfil VARCHAR(255), -- Agregar (DEFAULT 'URL_de_la_imagen_predeterminada',) cuando tengamos el link de la imagen predise�ada

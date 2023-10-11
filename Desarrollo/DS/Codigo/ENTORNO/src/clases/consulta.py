@@ -10,7 +10,8 @@ class ConexionSQLServer:
         try:
             # Establece la conexión
             self.conex = pyodbc.connect('DRIVER={SQL Server};'f'SERVER={self.server};'f'DATABASE={self.database}; Trusted_Connection=yes;')
-            return self.conn
+            #self.conex.setdecoding(pyodbc.SQL_CHAR, encoding='latin1')
+            #self.conex.setencoding('latin1')
         except Exception as e:
             print(f"Error al establecer la conexión con la base de datos: {str(e)}")
             return None
@@ -19,96 +20,113 @@ class ConexionSQLServer:
         if self.conex:
             self.conex.close()
         
-    def getDatosUsuario(self, datos):
+    def setDatosUsuario(self, datos):
         self.datos_usuario = datos
         
     def insertarUsuario(self):
+        '''
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
-                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, TipoDocumento, NDocumento, NombreDeUsuario, Contrasena, Correo, Direccion, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", self.datos_usuario)
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute("INSERT INTO Usuario(ID_Usuario, Nombre, Apellido, TipoDocumento, NDocumento, NombreDeUsuario, Contrasena, Correo, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);", self.datos_usuario)
                 cursor.commit()
                 self.cerrarConexion()
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
+        '''
+        self.establecerConexion()
+        if self.conex:
+            cursor = self.conex.cursor()
+            cursor.execute("INSERT INTO Usuario (ID_Usuario, Nombre, Apellido, TipoDocumento, NDocumento, NombreDeUsuario, Contrasena, Correo, NumeroDeCelular, Administrador, FotoPerfil, FechaCreacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);", self.datos_usuario)
+            cursor.commit()
+            self.cerrarConexion()
     
-    def getUUIDUsuario(self, UUID):
+    def setUUIDUsuario(self, UUID):
         self.UUID_usuario = UUID
     
     def encontrarUUIDUsuario(self):
+        '''
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
                 cursor.execute(f"SELECT ID_Usuario FROM Usuario WHERE ID_Usuario = {self.UUID_usuario}")
                 encontrado_usuario = cursor.fetchone()
                 self.cerrarConexion()
                 return encontrado_usuario
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
+        '''
+        self.establecerConexion()
+        if self.conex:
+            cursor = self.conex.cursor()
+            cursor.execute(f"SELECT ID_Usuario FROM Usuario WHERE ID_Usuario='{self.UUID_usuario}';")
+            encontrado_usuario = cursor.fetchone()
+            self.cerrarConexion()
+            return encontrado_usuario
     
-    def getLoginUsuario(self, correo, contrasena):
+    def setLoginUsuario(self, correo, contrasena):
         self.correo = correo
         self.contrasena = contrasena
 
     def autenticarUsuario(self):
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
-                cursor.execute(f"SELECT Correo, Contrasena FROM Usuario WHERE Correo = {self.correo} AND Contrasena = {self.contrasena}")
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute(f"SELECT Correo, Contrasena FROM Usuario WHERE Correo={self.correo} AND Contrasena={self.contrasena};")
                 esencial_usuario = cursor.fetchone()
                 self.cerrarConexion()
                 return esencial_usuario
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
         
     def devolverUsuario(self):
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
-                cursor.execute(f"SELECT * FROM Usuario WHERE Correo = {self.correo} AND Contrasena = {self.contrasena}")
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute(f"SELECT * FROM Usuario WHERE Correo={self.correo} AND Contrasena={self.contrasena};")
                 datos_usuario = cursor.fetchone()
                 self.cerrarConexion()
                 return datos_usuario
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
         
-    def getUUIDPublicacion(self, UUID):
+    def setUUIDPublicacion(self, UUID):
         self.UUID_publicacion = UUID
         
     def encontrarUUIDPublicacion(self):
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
-                cursor.execute(f"SELECT ID_Publicacion FROM Publicacion WHERE ID_Publicacion = {self.UUID_publicacion}")
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute(f"SELECT ID_Publicacion FROM Publicacion WHERE ID_Publicacion={self.UUID_publicacion};")
                 encontrado_publicacion = cursor.fetchone()
                 self.cerrarConexion()
                 return encontrado_publicacion
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
         
-    def getDatosPublicacion(self, datos):
+    def setDatosPublicacion(self, datos):
         self.datos_publicacion = datos
     
     def insertarDenuncia(self):
         try:
-            conex = self.establecerConexion()
-            if conex:
-                cursor = conex.cursor()
-                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, TituloDePublicacion, Descripcion, ID_Usuario, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?)", self.datos_publicacion)
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, TituloDePublicacion, Descripcion, ID_Usuario, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?);", self.datos_publicacion)
                 cursor.commit()
                 self.cerrarConexion()
         except:
-            print(f"Error al establecer la conexión con la base de datos: {str(e)}")
+            print(f"Error al establecer la conexión con la base de datos.")
             return None
     
     def datosDenuncia(self):

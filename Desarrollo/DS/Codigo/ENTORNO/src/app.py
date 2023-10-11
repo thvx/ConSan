@@ -17,37 +17,46 @@ def registroUsuario():
 	verificado = False
 	msg = ''
 	erroneo = False
+	usuario = request.form.get('nombre-usuario', False)
 	nombre = request.form.get('nombre', False)
 	apellidos = request.form.get('apellidos', False)
-	tipo_documento = request.form('tipo-documento', False)
+	tipo_documento = request.form.get('tipo-documento', False)
 	num_doc = request.form.get('numero-documento', False)
-	usuario = request.form.get('', False)
 	contrasena = request.form.get('contrasena', False)
 	correo = request.form.get('correo', False)
-	direccion = request.form.get('direccion', False)
 	num_celular = request.form.get('num_celular', False)
-	administrador = 0 
-	foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
-	fecha_creac = datetime.now()
-	fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
-	datos_esenciales = (nombre, apellidos)
-	for dato_esencial in datos_esenciales:
-		if dato_esencial.isdigit():
-			erroneo = True
-	
-	if not erroneo:
+	confirm_contrasena = request.form.get('confirmar-contrasena', False)
+
+	if request.method == 'POST':
+		datos_esenciales = (nombre, apellidos)
+		for dato_esencial in datos_esenciales:
+			if dato_esencial.isdigit():
+				msg = 'Los datos no pueden ser numéricos'
+				return redirect(url_for('registroUsuario'))
+		
+		if contrasena != confirm_contrasena:
+			msg = 'Las contraseñas deben coincidir'
+			return redirect(url_for('registroUsuario'))
+		
+		if len(contrasena) != 8:
+			msg = 'La contraseña no debe tener menos de 8 digitos'
+			return redirect(url_for('registroUsuario'))
+
+		administrador = 0 
+		foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
+		fecha_creac = datetime.now()
+		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
 		while not verificado:
 			ID_usuario = uuid.uuid4()
 			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
-			SQL.getUUIDUsuario(ID_usuario)
+			SQL.setUUIDUsuario(ID_usuario)
 			if SQL.encontrarUUIDUsuario() == None:
-				array = (ID_usuario, nombre, apellidos, tipo_documento, num_doc, usuario, contrasena, correo, direccion, num_celular, administrador, foto_perfil, fecha_creac)
-				SQL.getDatosUsuario(array)
+				array = (str(ID_usuario), nombre, apellidos, tipo_documento, num_doc, usuario, contrasena, correo, num_celular, administrador, foto_perfil, fecha_creac)
+				SQL.setDatosUsuario(array)
 				SQL.insertarUsuario()
 				msg = 'Registro con éxito'
 				verificado = True
-	else:
-		msg = 'Los datos no pueden ser numéricos'
+		return redirect(url_for('registroDenuncia'))
 	return render_template('registroUsuario.html')
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -92,6 +101,7 @@ def cerrarSesion():
 def registroDenuncia():
 	msg = ''
 	verificado = False
+	'''
 	if request.method == 'POST':
 		
 		titulo = request.form['titulo']
@@ -114,6 +124,7 @@ def registroDenuncia():
 		# FALTA INSERTAR IMAGENES EN LA TABLA
 	else:
 		msg = 'Método HTTP incorrecto'
+	'''
 	return render_template('registrarDenuncia.html')
 
 @app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
