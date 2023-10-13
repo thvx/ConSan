@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
+from flask_login import LoginManager,login_user,logout_user
 from clases.consulta import ConexionSQLServer
-from clases.user import User
 import uuid
 from datetime import datetime
 
@@ -38,7 +38,7 @@ def registroUsuario():
 			msg = 'Las contraseñas deben coincidir'
 			return redirect(url_for('registroUsuario'))
 		
-		if len(contrasena) != 8:
+		if len(contrasena) < 8:
 			msg = 'La contraseña no debe tener menos de 8 digitos'
 			return redirect(url_for('registroUsuario'))
 
@@ -56,40 +56,37 @@ def registroUsuario():
 				SQL.insertarUsuario()
 				msg = 'Registro con éxito'
 				verificado = True
-		return redirect(url_for('registroDenuncia'))
+		return redirect(url_for('loginUsuario'))
 	return render_template('registroUsuario.html')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def loginUsuario():
 	msg = ''
-	#correo = request.form['correo']
-	#contrasena = request.form['contrasena']
 	correo = request.form.get('correo', False)
 	contrasena = request.form.get('contrasena', False)
-	print(correo)
-	print(contrasena)
-	'''
-	SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
-	SQL.getLoginUsuario(correo, contrasena)
-	if SQL.autenticarUsuario is not None:
-		datos_usuario = SQL.devolverUsuario()
-		session['ID_usuario'] = datos_usuario[0]
-		session['ID_usuario'] = correo
-		session['nombre'] = datos_usuario[1] 
-		session['apellido'] = datos_usuario[2] 
-		session['DNI'] = datos_usuario[3]
-		session['usuario'] = datos_usuario[4] 
-		session['correo'] = datos_usuario[6]
-		session['direccion'] = datos_usuario[7]
-		session['celular'] = datos_usuario[8]
-		session['admin'] = datos_usuario[9]
-		session['foto_perfil'] = datos_usuario[10]
-		msg = 'Logeado con éxito'
-		# INICIAR AUTENTICACION CON FLASK LOGIN
-		return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
-	else:
-		msg = 'Correo o contraseña incorrectos'
-	'''
+	if request.method == 'POST':
+		SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+		SQL.setLoginUsuario(correo, contrasena)
+		print(correo)
+		print(contrasena)
+		if SQL.autenticarUsuario() != None:
+			datos_usuario = SQL.devolverUsuario()
+			print(datos_usuario)
+			session['ID_usuario'] = datos_usuario[0]
+			session['nombre'] = datos_usuario[1] 
+			session['apellido'] = datos_usuario[2] 
+			session['tipo_documento'] = datos_usuario[3]
+			session['num_documento'] = datos_usuario[4]
+			session['usuario'] = datos_usuario[5] 
+			session['correo'] = datos_usuario[7]
+			session['celular'] = datos_usuario[8]
+			session['admin'] = datos_usuario[9]
+			session['foto_perfil'] = datos_usuario[10]
+			msg = 'Logeado con éxito'
+			return redirect(url_for('registroDenuncia')) # FALTA DEFINIR PANTALLA PRINCIPAL
+		else:
+			msg = 'Correo o contraseña incorrectos'
+	
 	return render_template('inicioSesion.html')
 
 @app.route('/logout/')
