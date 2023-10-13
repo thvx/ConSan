@@ -98,10 +98,19 @@ def cerrarSesion():
 
 @app.route('/registro-denuncia/', methods = ['GET', 'POST'])
 def registroDenuncia():
-	msg = ''
-	verificado = False
-	try:
+		msg = ''
+		verificado = False
+	#try:
 		if session['logged'] == True and session['admin'] == 0:
+			motivo = request.form.get('categoria', False)
+			fecha = request.form.get('fechaHechos', False)
+			descripcion = request.form.get('descripcionHechos', False)
+			archivo = request.files.get('archivosHechos', False)
+			if request.method == 'POST':
+				print(motivo)
+				print(fecha)
+				print(descripcion)
+				print(session['logged'])
 			'''
 			if request.method == 'POST':
 				
@@ -127,9 +136,10 @@ def registroDenuncia():
 				msg = 'Método HTTP incorrecto'
 			'''
 			return render_template('registrarDenuncia.html')
-	except:
-		msg = 'Para acceder a esta página debes iniciar sesión'
-		return redirect(url_for('loginUsuario'))
+	#except:
+	#	msg = 'Para acceder a esta página debes iniciar sesión'
+	#	return redirect(url_for('loginUsuario'))
+		return render_template('registrarDenuncia.html')
 
 @app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
