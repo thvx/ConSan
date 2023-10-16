@@ -286,67 +286,88 @@ footer{
 .titulo {
     font-weight: bold;
     background-color: #f2f2f2;
-    text-align: left;
-    
-    
+    text-align: left;  
 }
 .columna {
     flex: 1;
     padding: 2px;
 }
-#grid-area {
-    display: grid;
-    grid-template-areas: 
-    "nav historialDenuncias denunciasResueltas"
-    "nav formulario formulario";
-
-    grid-template-rows:  0.5fr 0.5fr;
-    grid-template-columns:  auto ;
-    height: 100%;
-    grid-gap: 10px;
-    /* justify-content:center */
-}
-section#historialDenuncias {
-    grid-area: historialDenuncias;
-}
-section#denunciasResueltas {
-    grid-area: denunciasResueltas;
-}
-section#formulario {
-    grid-area: formulario;
-}
-.border {
-    background-color: rgb(240, 240, 240);
-    padding: 5px;
-    margin: 5px;
-    border-radius: 6px;
-}
+/* Estilos para la sección que contiene ambos gráficos */
+.grafico-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  /* Estilos para las secciones de gráficos */
+  .section-1, .section-2 {
+    flex: 1; /* Distribuir el espacio disponible de manera equitativa */
+    padding-bottom: 20px;
+  }
+  .grafico-titulo {
+    font-family: "Rubik", sans-serif;
+    color: #023047;
+    font-size: 24px;
+    text-align: center;
+  }
+  .grafico-tamanio {
+    width: 150px;
+  }
+  .grafico-tamanio-barras {
+    width: 300px;
+  }
+  .grafico-fondo {
+    font-family: "Rubik", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+    width: fit-content;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 8px 32px;
+    color: #023047;
+    transition: all 400ms ease;
+  }
+  .grafico-fondo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+  }
+  .grafico-elementos ul {
+    list-style: none;
+    padding: 0;
+  }
+  .grafico-elementos ul li {
+    font-size: 16px;
+    margin: 12px 0;
+    text-transform: uppercase;
+  }
+  .grafico-elementos .porcentaje {
+    font-weight: 700;
+    color: #e63946;
+  }
 .boton {
     display: inline-block;
     padding: 10px 20px; /* Ajusta el padding según tus preferencias */
     width: 120px; /* Ancho del botón */
     height: 40px; /* Altura del botón */
-    color: #fff; /* Cambia el color del texto según tu preferencia */
     border: 1px solid #000000; /* Agrega un borde */
     border-radius: 5px; /* Añade esquinas redondeadas */
     cursor: pointer; /* Cambia el cursor al pasar el ratón */
     text-align: center;
     transition: background-color 0.3s, color 0.3s; /* Agrega transiciones suaves al color de fondo y al color del texto */
+    color: #000; /* Cambia el color del texto a negro */
+    text-decoration: none; /* Quita el subrayado del texto */
   }
   .boton.active {
-    background-color: #151618; /* Fondo blanco para el estado activo */
-    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+    background-color: #2196F3; /* Fondo blanco para el estado activo */
   }
   .boton.inactive {
-    background-color: #c2b9b7; /* Fondo blanco para el estado activo */
-    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+    background-color: #FFC107; /* Fondo blanco para el estado activo */
   }
   .boton.disabled {
-    background-color: #ff0000; /* Fondo blanco para el estado activo */
-    color: #d4d3d3; /* Cambia el color del texto en el estado activo */
+    background-color: #023047; /* Fondo blanco para el estado activo */
   }
   .boton:hover {
-    background-color: #000000; /* Cambia el color de fondo en el hover */
+    background-color: #4CAF50; /* Cambia el color de fondo en el hover */
     color: #fff; /* Cambia el color del texto en el hover */
   }
-  
