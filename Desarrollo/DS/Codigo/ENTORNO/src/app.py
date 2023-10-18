@@ -100,46 +100,34 @@ def cerrarSesion():
 def registroDenuncia():
 	msg = ''
 	verificado = False
+	#motivo = request.form.getlist('categoria', False)
+	fecha = request.form.get('fechaHechos', False)
+	descripcion = request.form.get('descripcionHechos', False)
+	archivo = request.files.get('archivosHechos', False)
+	if request.method == 'POST':
+		#print(motivo)
+		print("eeeeeeeeeee")
+		print(fecha)
+		print(descripcion)
+	'''
 	try:
 		if session['logged'] == True and session['admin'] == 0:
-			#motivo = request.form.getlist('categoria', False)
-			#fecha = request.form.get('fechaHechos', False)
-			#descripcion = request.form.get('descripcionHechos', False)
-			#archivo = request.files.get('archivosHechos', False)
+			motivo = request.form.getlist('categoria', False)
+			fecha = request.form.get('fechaHechos', False)
+			descripcion = request.form.get('descripcionHechos', False)
+			archivo = request.files.get('archivosHechos', False)
 			if request.method == 'POST':
-				#print(motivo)
+				print(motivo)
 				print("eeeeeeeeeee")
-				#print(fecha)
-				#print(descripcion)
+				print(fecha)
+				print(descripcion)
 				print(session['logged'])
-			'''
-			if request.method == 'POST':
-				
-				titulo = request.form['titulo']
-				descripcion = request.form['descripcion']
-				ID_usuario = session['ID_usuario']
-				fecha_creac = datetime.now()
-				fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
-				relevancia = 0
-				URL_imagen = request.form['URL_imagen'] # FALTA ACORDAR CUANDO SON VARIAS IMAGENES
-				while not verificado:
-					ID_publicacion = uuid.uuid4()
-					SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
-					SQL.getUUIDPublicacion(ID_publicacion)
-					if SQL.encontrarUUIDPublicacion() == None:
-						array = (ID_publicacion, titulo, descripcion, ID_usuario, fecha_creac, relevancia)
-						SQL.getDatosPublicacion(array)
-						SQL.insertarDenuncia()
-						msg = 'Registro con éxito'
-						verificado = True
-				# FALTA INSERTAR IMAGENES EN LA TABLA
-			else:
-				msg = 'Método HTTP incorrecto'
-			'''
 			return render_template('registrarDenuncia.html')
 	except:
 		msg = 'Para acceder a esta página debes iniciar sesión'
 		return redirect(url_for('loginUsuario'))
+	'''
+	return render_template('registrarDenuncia.html')
 
 @app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
