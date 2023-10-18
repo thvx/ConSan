@@ -185,17 +185,13 @@ h2{
     gap: 30px;
 }
 
-#seccion1, .formulario-elegir-denuncia,
-#seccion2, .formulario-registro-denuncia,
-#seccion3, .formulario-compartir-denuncia{
+#seccion1, .formulario-completo, #seccion2, #seccion3{
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.formulario-elegir-denuncia,
-.formulario-registro-denuncia,
-.formulario-compartir-denuncia{
+.formulario-completo{
     display: flex;
     flex-direction: column;
     padding: 2%;
@@ -208,7 +204,7 @@ h2{
     width: 100%;
 }
 
-.col-6 p, .formulario-registro-denuncia{
+.col-6 p{
     text-align:justify;
     padding: 5%;
 }
