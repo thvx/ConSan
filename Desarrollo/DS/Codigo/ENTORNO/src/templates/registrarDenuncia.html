@@ -25,7 +25,7 @@
     </header>
     
     <main>
-        <form class="formulario-completo" action="/registrar-denuncia/" method="POST" enctype="multipart/form-data">
+        <form class="formulario-completo" action="/registro-denuncia/" method="POST" enctype="multipart/form-data">
         <section class="section-elegir-denuncia" id="seccion1" style="display: flex; flex-direction: column;">
             <h2>Nueva denuncia</h2>
                 <p class="formulario-descripcion">Selecciona el/los ícono(s) que más se aproxime(n) al hecho o falta que quieras reportar</p>
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="1">
+                                <input type="checkbox" class="motivos" name="categoria" value="Discriminación">
                                 <img class="icon-prueba" src="..\static\images\person-slash.svg" alt="Ícono 01">
                                 <h5 class="labelMotivo">Discriminación</h5>
                                 <p class="descripcionMotivo">Denuncias de discriminación racial, religiosa, de género u orientación sexual.</p>
@@ -41,7 +41,7 @@
                         </div>                        
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="2">
+                                <input type="checkbox" class="motivos" name="categoria" value="Corrupción">
                                 <img class="icon-prueba" src="..\static\images\cash-coin.svg" alt="Ícono 02">
                                 <h5 class="labelMotivo">Corrupción</h5>
                                 <p class="descripcionMotivo">Actos ilegales, sobornos o abuso de poder para beneficio personal</p>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="3">
+                                <input type="checkbox" class="motivos" name="categoria" value="Abuso de poder">
                                 <img class="icon-prueba" src="..\static\images\equilibrio.png" alt="Ícono 03">
                                 <h5 class="labelMotivo">Abuso de poder</h5>
                                 <p class="descripcionMotivo">Uso indebido de la autoridad para dañar a otros o beneficio propio</p>
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="4">
+                                <input type="checkbox" class="motivos" name="categoria" value="Difamación">
                                 <img class="icon-prueba" src="..\static\images\chat-dots.svg" alt="Ícono 04">
                                 <h5 class="labelMotivo">Difamación</h5>
                                 <p class="descripcionMotivo">Divulgación de información falsa para dañar la reputación de alguien</p>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="5">
+                                <input type="checkbox" class="motivos" name="categoria" value="Acoso">
                                 <img class="icon-prueba" src="..\static\images\person-fill-exclamation.svg" alt="Ícono 05">
                                 <h5 class="labelMotivo">Acoso</h5>
                                 <p class="descripcionMotivo">Persecución persistente que causa incomodidad o temor</p>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="6">
+                                <input type="checkbox" class="motivos" name="categoria" value="Seguridad Ciudadana">
                                 <img class="icon-prueba" src="..\static\images\shield-lock.svg" alt="Ícono 06">
                                 <h5 class="labelMotivo">Seguridad Ciudadana</h5>
                                 <p class="descripcionMotivo">Denuncias sobre la seguridad en la comunidad, delitos, robos, vandalismo, etc.</p>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="7">
+                                <input type="checkbox" class="motivos" name="categoria" value="Servicios Públicos">
                                 <img class="icon-prueba" src="..\static\images\tap.svg"  alt="Ícono 07">
                                 <h5 class="labelMotivo">Servicios Públicos</h5>
                                 <p class="descripcionMotivo"> Denuncias relacionadas con servicios públicos como agua, electricidad, alcantarillado, etc.</p>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="8">
+                                <input type="checkbox" class="motivos" name="categoria" value="Protección Animal">
                                 <img class="icon-prueba" src="..\static\images\terapia-animal.png" alt="Ícono 08">
                                 <h5 class="labelMotivo">Protección Animal</h5>
                                 <p class="descripcionMotivo">Denuncias de abuso animal, negligencia o maltrato hacia los animales</p>
@@ -101,7 +101,7 @@
                         </div>
                         <div class="col-6 col-sm-4">
                             <label class="boton-01">
-                                <input type="checkbox" class="motivos" name="categoria" value="9">
+                                <input type="checkbox" class="motivos" name="categoria" value="Otros">
                                 <img class="icon-prueba" src="..\static\images\archive.svg" alt="Ícono 09">
                                 <h5 class="labelMotivo">Otros</h5>
                                 <p class="descripcionMotivo">Cualquier otro motivo que no se ajuste a las categorías anteriores</p>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="enviar-checkbox" class="btn btn-primary btn-lg">Continuar</button>
+                <button type="submit" id="iniciar-denuncia" name="enviar-checkbox" class="btn btn-primary btn-lg">Continuar</button>
         </section>
 
         <section class="section-formulario-denuncia" id="seccion2" style="display: none; flex-direction: column;">

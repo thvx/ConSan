@@ -66,11 +66,8 @@ def loginUsuario():
 	if request.method == 'POST':
 		SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 		SQL.setLoginUsuario(correo, contrasena)
-		print(correo)
-		print(contrasena)
 		if SQL.autenticarUsuario() != None:
 			datos_usuario = SQL.devolverUsuario()
-			print(datos_usuario)
 			session['ID_usuario'] = datos_usuario[0]
 			session['nombre'] = datos_usuario[1] 
 			session['apellido'] = datos_usuario[2] 
@@ -100,7 +97,7 @@ def cerrarSesion():
 def registroDenuncia():
 	msg = ''
 	verificado = False
-	motivo = request.form.getlist('categoria', False)
+	motivo = request.form.getlist('categoria')
 	fecha = request.form.get('fechaHechos', False)
 	descripcion = request.form.get('descripcionHechos', False)
 	archivo = request.files.get('archivosHechos', False)
@@ -109,10 +106,19 @@ def registroDenuncia():
 		print("eeeeeeeeeee")
 		print(fecha)
 		print(descripcion)
+		fecha_creac = datetime.now()
+		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
+		relevancia = 0
+		while not verificado:
+			ID_publicacion = uuid.uuid4()
+			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+			SQL.setUUIDPublicacion(ID_publicacion)
+			if SQL.encontrarUUIDPublicacion == None:
+				pass
 	'''
 	try:
 		if session['logged'] == True and session['admin'] == 0:
-			motivo = request.form.getlist('categoria', False)
+			motivo = request.form.getlist('categoria')
 			fecha = request.form.get('fechaHechos', False)
 			descripcion = request.form.get('descripcionHechos', False)
 			archivo = request.files.get('archivosHechos', False)
