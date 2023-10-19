@@ -25,9 +25,9 @@
     </header>
     
     <main>
+        <form class="formulario-completo" action="/registrar-denuncia/" method="POST" enctype="multipart/form-data">
         <section class="section-elegir-denuncia" id="seccion1" style="display: flex; flex-direction: column;">
             <h2>Nueva denuncia</h2>
-            <form class="formulario-elegir-denuncia" action="/registrar-denuncia/" method="POST">
                 <p class="formulario-descripcion">Selecciona el/los ícono(s) que más se aproxime(n) al hecho o falta que quieras reportar</p>
                 <div class="container text-center">
                     <div class="row">
@@ -109,8 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <a id="iniciar-denuncia" class="btn btn-primary btn-lg">Continuar</a>
-            </form>
+                <button type="submit" name="enviar-checkbox" class="btn btn-primary btn-lg">Continuar</button>
         </section>
 
         <section class="section-formulario-denuncia" id="seccion2" style="display: none; flex-direction: column;">
@@ -123,7 +122,6 @@
                     <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8ZM9.283 4.002H7.971L6.072 5.385v1.271l1.834-1.318h.065V12h1.312V4.002Z" />
                 </svg>
             </div>
-            <form class="formulario-registro-denuncia" action="/registrar-denuncia/" method="POST">
                 <p class="formulario-descripcion">Esta plataforma tiene como objetivo constituir un mecanismo ágil y moderno mediante el cual la ciudadanía pueda presentar denuncias por faltas cometidas que perjudiquen a la comunidad</p>
                 <div class="mb-3">
                     <label for="fechaHechos" class="form-label">Fecha de los hechos</label>
@@ -138,7 +136,6 @@
                     <input class="form-control" type="file" id="archivosHechos" name="archivosHechos">
                 </div>
                 <a id="continuar-denuncia" class="btn btn-primary btn-lg">Continuar</a>
-            </form>
         </section>
 
         <section class="section-formulario-compartir" id="seccion3" style="display: none; flex-direction: column;">
@@ -151,16 +148,15 @@
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24c0-.691.493-1.306 1.336-1.306.756 0 1.313.492 1.313 1.236 0 .697-.469 1.23-.902 1.705l-2.971 3.293V12h5.344v-1.107H7.268v-.077l1.974-2.22.096-.107c.688-.763 1.287-1.428 1.287-2.43 0-1.266-1.031-2.215-2.613-2.215-1.758 0-2.637 1.19-2.637 2.402v.065h1.271v-.07Z"/>
                 </svg>
             </div>
-            <form class="formulario-compartir-denuncia" action="/compartir-denuncia/" method="POST">
                 <div class="mb-3">
                     <p>¿Deseas realizar la denuncia de forma anónima?</p>
                     <label>
                         <input type="checkbox" id="denunciaAnonima"> Sí, continuar de forma anónima
                     </label>
                 </div>
-                <a id="finalizar-denuncia" class="btn btn-primary btn-lg" href="{{url_for('seguimientoDenuncia')}}">Continuar</a>
-            </form>
+                <button name="enviar-denuncia" class="btn btn-primary btn-lg" type="submit">Enviar Denuncia</button>
         </section>
+        </form>
     </main>
 
     <footer>
@@ -216,6 +212,5 @@
                 });
             });
         </script>
-
 </body>
 </html>
