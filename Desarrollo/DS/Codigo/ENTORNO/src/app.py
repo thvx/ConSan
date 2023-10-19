@@ -100,12 +100,12 @@ def cerrarSesion():
 def registroDenuncia():
 	msg = ''
 	verificado = False
-	#motivo = request.form.getlist('categoria', False)
+	motivo = request.form.getlist('categoria', False)
 	fecha = request.form.get('fechaHechos', False)
 	descripcion = request.form.get('descripcionHechos', False)
 	archivo = request.files.get('archivosHechos', False)
 	if request.method == 'POST':
-		#print(motivo)
+		print(motivo)
 		print("eeeeeeeeeee")
 		print(fecha)
 		print(descripcion)
