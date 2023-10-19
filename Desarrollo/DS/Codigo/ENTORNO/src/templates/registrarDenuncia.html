@@ -25,7 +25,7 @@
     </header>
     
     <main>
-        <form class="formulario-completo" action="/registro-denuncia/" method="POST">
+        <form class="formulario-completo" action="/registrar-denuncia/" method="POST" enctype="multipart/form-data">
         <section class="section-elegir-denuncia" id="seccion1" style="display: flex; flex-direction: column;">
             <h2>Nueva denuncia</h2>
                 <p class="formulario-descripcion">Selecciona el/los ícono(s) que más se aproxime(n) al hecho o falta que quieras reportar</p>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <a id="iniciar-denuncia" class="btn btn-primary btn-lg">Continuar</a>
+                <button type="submit" name="enviar-checkbox" class="btn btn-primary btn-lg">Continuar</button>
         </section>
 
         <section class="section-formulario-denuncia" id="seccion2" style="display: none; flex-direction: column;">
@@ -154,7 +154,7 @@
                         <input type="checkbox" id="denunciaAnonima"> Sí, continuar de forma anónima
                     </label>
                 </div>
-                <button id="finalizar-denuncia" class="btn btn-primary btn-lg" type="submit">Enviar Denuncia</button>
+                <button name="enviar-denuncia" class="btn btn-primary btn-lg" type="submit">Enviar Denuncia</button>
         </section>
         </form>
     </main>
