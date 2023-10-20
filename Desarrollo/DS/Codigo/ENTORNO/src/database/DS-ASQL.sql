@@ -25,7 +25,7 @@ CREATE TABLE Publicacion (
     MotivosDenuncia VARCHAR(255),
     Descripcion TEXT,
     ID_Usuario VARCHAR(50),  -- Referencia al ID del usuario que cre� la publicaci�n
-    FechaDenuncia DATETIME,
+    FechaDenuncia DATE,
     FechaCreacion DATETIME,
     Relevancia INT DEFAULT 0,
     FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
@@ -47,3 +47,5 @@ CREATE TABLE Comentarios (
     FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario),
     FOREIGN KEY (ID_Publicacion) REFERENCES Publicacion(ID_Publicacion)
 );
+
+-- INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia) VALUES('3862d1dc-add8-49d9-bb64-793fe766cf29', ' - Corrupción - Abuso de poder - Seguridad Ciudadana', 'xddd', '1203120', '2022-02-22', '2023-10-20 16:42:46', 0);

@@ -33,9 +33,9 @@ def registroUsuario():
 				msg = 'Los datos no pueden ser numéricos'
 				return redirect(url_for('registroUsuario'))
 		
-		if contrasena != confirm_contrasena:
-			msg = 'Las contraseñas deben coincidir'
-			return redirect(url_for('registroUsuario'))
+		#if contrasena != confirm_contrasena:
+		#	msg = 'Las contraseñas deben coincidir'
+		#	return redirect(url_for('registroUsuario'))
 		
 		if len(contrasena) < 8:
 			msg = 'La contraseña no debe tener menos de 8 digitos'
@@ -114,10 +114,12 @@ def registroDenuncia():
 			SQL.setUUIDPublicacion(ID_publicacion)
 			motivo_limpio = ''
 			relevancia = 0
+			fecha_denuncia = (datetime.strptime(fecha, '%Y-%m-%d')).strftime('%Y-%m-%d')
 			for motivos in motivo:
-				motivo_limpio = motivo_limpio + ", " + motivos
+				motivo_limpio = motivo_limpio + " - " + motivos
 			if SQL.encontrarUUIDPublicacion() == None:
-				array = (str(ID_publicacion), motivo_limpio, descripcion, '1203120', fecha, fecha_creac, relevancia)
+				array = (str(ID_publicacion), motivo_limpio, descripcion, '1203120', fecha_denuncia, fecha_creac, relevancia)
+				print(array)
 				SQL.setDatosPublicacion(array)
 				SQL.insertarDenuncia()
 				msg = 'Registrado con éxito'
