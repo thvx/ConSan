@@ -22,9 +22,10 @@ CREATE TABLE Usuario (
 -- Tabla Publicacion
 CREATE TABLE Publicacion (
     ID_Publicacion VARCHAR(50) PRIMARY KEY,
-    TituloDePublicacion VARCHAR(150),
+    MotivosDenuncia VARCHAR(255),
     Descripcion TEXT,
     ID_Usuario VARCHAR(50),  -- Referencia al ID del usuario que cre� la publicaci�n
+    FechaDenuncia DATETIME,
     FechaCreacion DATETIME,
     Relevancia INT DEFAULT 0,
     FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
