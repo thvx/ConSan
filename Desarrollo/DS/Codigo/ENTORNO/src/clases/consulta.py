@@ -72,32 +72,24 @@ class ConexionSQLServer:
         self.UUID_publicacion = UUID
         
     def encontrarUUIDPublicacion(self):
-        try:
             self.establecerConexion()
             if self.conex:
                 cursor = self.conex.cursor()
-                cursor.execute(f"SELECT ID_Publicacion FROM Publicacion WHERE ID_Publicacion={self.UUID_publicacion};")
+                cursor.execute(f"SELECT ID_Publicacion FROM Publicacion WHERE ID_Publicacion='{self.UUID_publicacion}';")
                 encontrado_publicacion = cursor.fetchone()
                 self.cerrarConexion()
                 return encontrado_publicacion
-        except:
-            print(f"Error al establecer la conexión con la base de datos.")
-            return None
         
     def setDatosPublicacion(self, datos):
         self.datos_publicacion = datos
     
     def insertarDenuncia(self):
-        try:
             self.establecerConexion()
             if self.conex:
                 cursor = self.conex.cursor()
-                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, TituloDePublicacion, Descripcion, ID_Usuario, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?);", self.datos_publicacion)
+                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?,?);", self.datos_publicacion)
                 cursor.commit()
                 self.cerrarConexion()
-        except:
-            print(f"Error al establecer la conexión con la base de datos.")
-            return None
     
     def datosDenuncia(self):
         return None

@@ -12,7 +12,7 @@ CREATE TABLE Usuario (
     TipoDocumento VARCHAR(30),
     NDocumento VARCHAR(10),
     NombreDeUsuario VARCHAR(35) UNIQUE,
-    Contrasena VARCHAR(20),
+    Contrasena VARCHAR(255),
     Correo VARCHAR(255),
     NumeroDeCelular VARCHAR(9),
     Administrador BIT,  -- Campo que indica si el usuario es administrador (true=1/false=0)

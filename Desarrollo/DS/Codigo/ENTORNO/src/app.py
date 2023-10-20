@@ -103,7 +103,6 @@ def registroDenuncia():
 	archivo = request.files.get('archivosHechos', False)
 	if request.method == 'POST':
 		print(motivo)
-		print("eeeeeeeeeee")
 		print(fecha)
 		print(descripcion)
 		fecha_creac = datetime.now()
@@ -113,8 +112,16 @@ def registroDenuncia():
 			ID_publicacion = uuid.uuid4()
 			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
 			SQL.setUUIDPublicacion(ID_publicacion)
-			if SQL.encontrarUUIDPublicacion == None:
-				pass
+			motivo_limpio = ''
+			relevancia = 0
+			for motivos in motivo:
+				motivo_limpio = motivo_limpio + ", " + motivos
+			if SQL.encontrarUUIDPublicacion() == None:
+				array = (str(ID_publicacion), motivo_limpio, descripcion, '1203120', fecha, fecha_creac, relevancia)
+				SQL.setDatosPublicacion(array)
+				SQL.insertarDenuncia()
+				msg = 'Registrado con éxito'
+				verificado = True
 	'''
 	try:
 		if session['logged'] == True and session['admin'] == 0:
