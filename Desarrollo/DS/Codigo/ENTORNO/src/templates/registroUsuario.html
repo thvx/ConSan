@@ -24,9 +24,8 @@
                 <div class="card cascading-right">
                 <div class="card-body p-5 shadow-5 text-center">
                     <h2 class="fw-bold mb-5">Crear una cuenta</h2>
-                    <section class="registro-usuario-1">
-                        <form class="formulario-registro" action="/registro-usuario/" method="POST">
-                            <!-- Sección 1 -->
+                    <form class="formulario-registro" action="/registro-usuario/" method="POST">
+                        <section class="registro-usuario-1">  
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                 <div class="form-outline mb-4">
@@ -56,15 +55,13 @@
                             </div>
 
                             <div class="pt-1 mb-4">
-                                <button type="button" id="continuarBtn" class="btn btn-primary btn-lg">Continuar registro</button>
+                                <button type="submit" id="continuarBtn" class="btn btn-primary btn-lg">Continuar registro</button>
                             </div>
                             <p>¿Ya tienes una cuenta? <a href="{{url_for('loginUsuario')}}" class="link-info">Inicia Sesión</a></p>
-                            </form>
-                    </section>
+                        </section>
                      
-                    <section class="registro-usuario-2" style= "display: none;">
-                        <form class="formulario-registro" action="/registro-usuario/" method="POST">
-                            <!-- Sección 2 -->
+                        <!-- Sección 2 -->
+                        <section class="registro-usuario-2" style= "display: none;">
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline mb-4">
@@ -89,14 +86,12 @@
                                 <label class="form-check-label" for="terminos-condiciones">Acepto los términos y condiciones</label>
                             </div>
                             
-
                             <div class="pt-1 mb-4">
                                 <button type="submit" class="btn btn-primary btn-lg">Registrar usuario</button>
                             </div>
                             <p>¿Ya tienes una cuenta? <a href="{{url_for('loginUsuario')}}" class="link-info">Inicia Sesión</a></p>
-
-                            </form>
-                    </section>
+                        </section>
+                    </form>
                 </div>
                 </div>
             </div>
