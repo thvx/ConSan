@@ -2,6 +2,9 @@ from flask import Flask, request, render_template, redirect, url_for, session
 from clases.consulta import ConexionSQLServer
 import uuid
 from datetime import datetime
+import os
+
+PATH_FILE = os.getcwd() + "/files/"
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -104,6 +107,7 @@ def registroDenuncia():
 			archivo = request.files.get('archivosHechos', False)
 			anonimo = request.form.get('anonimo', False)
 			if request.method == 'POST':
+				print(motivo)
 				fecha_creac = datetime.now()
 				relevancia = 0
 				while not verificado:
@@ -125,6 +129,8 @@ def registroDenuncia():
 						print(array)
 						SQL.setDatosPublicacion(array)
 						SQL.insertarDenuncia()
+						os.mkdir(str(ID_publicacion))
+						archivo.save(PATH_FILE + str(ID_publicacion))
 						msg = 'Registrado con éxito'
 						verificado = True
 			return render_template('registrarDenuncia.html')
