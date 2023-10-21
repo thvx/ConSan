@@ -44,7 +44,6 @@ def registroUsuario():
 		administrador = 0 
 		foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
 		fecha_creac = datetime.now()
-		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
 		while not verificado:
 			ID_usuario = uuid.uuid4()
 			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
@@ -97,52 +96,42 @@ def cerrarSesion():
 def registroDenuncia():
 	msg = ''
 	verificado = False
-	motivo = request.form.getlist('categoria')
-	fecha = request.form.get('fechaHechos', False)
-	descripcion = request.form.get('descripcionHechos', False)
-	archivo = request.files.get('archivosHechos', False)
-	if request.method == 'POST':
-		print(motivo)
-		print(fecha)
-		print(descripcion)
-		fecha_creac = datetime.now()
-		fecha_creac = fecha_creac.strftime("%Y-%m-%d %H:%M:%S")
-		relevancia = 0
-		while not verificado:
-			ID_publicacion = uuid.uuid4()
-			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
-			SQL.setUUIDPublicacion(ID_publicacion)
-			motivo_limpio = ''
-			relevancia = 0
-			fecha_denuncia = (datetime.strptime(fecha, '%Y-%m-%d')).strftime('%Y-%m-%d')
-			for motivos in motivo:
-				motivo_limpio = motivo_limpio + " - " + motivos
-			if SQL.encontrarUUIDPublicacion() == None:
-				array = (str(ID_publicacion), motivo_limpio, descripcion, '1203120', fecha_denuncia, fecha_creac, relevancia)
-				print(array)
-				SQL.setDatosPublicacion(array)
-				SQL.insertarDenuncia()
-				msg = 'Registrado con éxito'
-				verificado = True
-	'''
 	try:
 		if session['logged'] == True and session['admin'] == 0:
 			motivo = request.form.getlist('categoria')
 			fecha = request.form.get('fechaHechos', False)
 			descripcion = request.form.get('descripcionHechos', False)
 			archivo = request.files.get('archivosHechos', False)
+			anonimo = request.form.get('anonimo', False)
 			if request.method == 'POST':
-				print(motivo)
-				print("eeeeeeeeeee")
-				print(fecha)
-				print(descripcion)
-				print(session['logged'])
+				fecha_creac = datetime.now()
+				relevancia = 0
+				while not verificado:
+					ID_publicacion = uuid.uuid4()
+					SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+					SQL.setUUIDPublicacion(ID_publicacion)
+					motivo_limpio = ''
+					if anonimo == '1':
+						relevancia = 1
+					else:
+						relevancia = 0
+					for motivos in motivo:
+						if motivo_limpio=='':
+							motivo_limpio = motivos
+						else:
+							motivo_limpio = motivo_limpio + " - " + motivos
+					if SQL.encontrarUUIDPublicacion() == None:
+						array = (str(ID_publicacion), motivo_limpio, descripcion, session['ID_usuario'], fecha, fecha_creac, relevancia)
+						print(array)
+						SQL.setDatosPublicacion(array)
+						SQL.insertarDenuncia()
+						msg = 'Registrado con éxito'
+						verificado = True
 			return render_template('registrarDenuncia.html')
-	except:
+	except KeyError:
 		msg = 'Para acceder a esta página debes iniciar sesión'
 		return redirect(url_for('loginUsuario'))
-	'''
-	return render_template('registrarDenuncia.html')
+	
 
 @app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
 def seguimientoDenuncia():
