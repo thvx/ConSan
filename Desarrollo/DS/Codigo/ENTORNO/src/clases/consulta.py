@@ -40,6 +40,30 @@ class ConexionSQLServer:
             self.cerrarConexion()
             return encontrado_usuario
     
+    def setNombreUsuario(self, usuario):
+        self.usuario = usuario
+
+    def encontrarNombreUsuario(self):
+        self.establecerConexion()
+        if self.conex:
+            cursor = self.conex.cursor()
+            cursor.execute(f"SELECT NombreDeUsuario FROM Usuario WHERE NombreDeUsuario='{self.usuario}';")
+            encontrado_usuario = cursor.fetchone()
+            self.cerrarConexion()
+            return encontrado_usuario
+        
+    def setCorreo(self, correo):
+        self.correo = correo
+
+    def encontrarCorreo(self):
+        self.establecerConexion()
+        if self.conex:
+            cursor = self.conex.cursor()
+            cursor.execute(f"SELECT Correo FROM Usuario WHERE Correo='{self.correo}';")
+            encontrado_usuario = cursor.fetchone()
+            self.cerrarConexion()
+            return encontrado_usuario
+    
     def setLoginUsuario(self, correo, contrasena):
         self.correo = correo
         self.contrasena = contrasena

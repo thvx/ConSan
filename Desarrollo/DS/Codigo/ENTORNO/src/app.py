@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 import os
 
-PATH_FILE = os.getcwd() + "/files/"
+PATH_FILE = os.path.join(os.getcwd(), 'src/files')
 
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -18,7 +18,6 @@ def inicio():
 def registroUsuario():
 	verificado = False
 	msg = ''
-	erroneo = False
 	usuario = request.form.get('nombre-usuario', False)
 	nombre = request.form.get('nombre', False)
 	apellidos = request.form.get('apellidos', False)
@@ -27,7 +26,7 @@ def registroUsuario():
 	contrasena = request.form.get('contrasena', False)
 	correo = request.form.get('correo', False)
 	num_celular = request.form.get('num_celular', False)
-	confirm_contrasena = request.form.get('confirmar-contrasena', False)
+	confirm_contrasena = request.form.get('verificar-contrasena', False)
 
 	if request.method == 'POST':
 		datos_esenciales = (nombre, apellidos)
@@ -36,20 +35,30 @@ def registroUsuario():
 				msg = 'Los datos no pueden ser numéricos'
 				return redirect(url_for('registroUsuario'))
 		
-		#if contrasena != confirm_contrasena:
-		#	msg = 'Las contraseñas deben coincidir'
-		#	return redirect(url_for('registroUsuario'))
+		if contrasena != confirm_contrasena:
+			msg = 'Las contraseñas deben coincidir'
+			return redirect(url_for('registroUsuario'))
 		
 		if len(contrasena) < 8:
 			msg = 'La contraseña no debe tener menos de 8 digitos'
 			return redirect(url_for('registroUsuario'))
 
 		administrador = 0 
-		foto_perfil = '010101' # DEBE SER OPCIONAL (PROVISIONAL)
+		foto_perfil = '010101'
 		fecha_creac = datetime.now()
 		while not verificado:
 			ID_usuario = uuid.uuid4()
 			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+			SQL.setNombreUsuario(usuario)
+			SQL.setCorreo(correo)
+			if SQL.encontrarNombreUsuario() is not None:
+				msg = 'Ese nombre de usuario ya existe'
+				return redirect(url_for('registroUsuario'))
+			
+			if SQL.encontrarCorreo() is not None:
+				msg = 'Ese correo ya está registrado'
+				return redirect(url_for('registroUsuario'))
+			
 			SQL.setUUIDUsuario(ID_usuario)
 			if SQL.encontrarUUIDUsuario() == None:
 				array = (str(ID_usuario), nombre, apellidos, tipo_documento, num_doc, usuario, contrasena, correo, num_celular, administrador, foto_perfil, fecha_creac)
@@ -107,7 +116,6 @@ def registroDenuncia():
 			archivo = request.files.get('archivosHechos', False)
 			anonimo = request.form.get('anonimo', False)
 			if request.method == 'POST':
-				print(motivo)
 				fecha_creac = datetime.now()
 				relevancia = 0
 				while not verificado:
@@ -127,12 +135,19 @@ def registroDenuncia():
 					if SQL.encontrarUUIDPublicacion() == None:
 						array = (str(ID_publicacion), motivo_limpio, descripcion, session['ID_usuario'], fecha, fecha_creac, relevancia)
 						print(array)
-						SQL.setDatosPublicacion(array)
-						SQL.insertarDenuncia()
-						os.mkdir(str(ID_publicacion))
-						archivo.save(PATH_FILE + str(ID_publicacion))
-						msg = 'Registrado con éxito'
-						verificado = True
+						if archivo.filename.endswith(".png"):
+							SQL.setDatosPublicacion(array)
+							SQL.insertarDenuncia()
+							PATH_PUBLICACION = str(ID_publicacion)
+							NEW_PATH = os.path.join(PATH_FILE, PATH_PUBLICACION)
+							os.mkdir(NEW_PATH)
+							FINAL_PATH = os.path.join(NEW_PATH, PATH_PUBLICACION + '.png')
+							archivo.save(FINAL_PATH)
+							msg = 'Registrado con éxito'
+							verificado = True
+						else:
+							msg = 'El archivo que suba debe ser png'
+							return render_template('registrarDenuncia.html')
 			return render_template('registrarDenuncia.html')
 	except KeyError:
 		msg = 'Para acceder a esta página debes iniciar sesión'
