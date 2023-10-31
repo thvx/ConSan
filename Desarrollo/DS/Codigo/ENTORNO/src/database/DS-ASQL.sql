@@ -28,6 +28,7 @@ CREATE TABLE Publicacion (
     FechaDenuncia DATE,
     FechaCreacion DATETIME,
     Relevancia INT DEFAULT 0,
+    Estatus VARCHAR(15) DEFAULT 'active',
     FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario)
 );
 -- Tabla de Im�gen (asociada a las publicaciones)

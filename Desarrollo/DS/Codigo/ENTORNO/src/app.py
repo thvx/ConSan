@@ -165,8 +165,10 @@ def admin():
 	verificado = False
 	try:
 		if session['logged'] == True and session['admin'] == 1:
+			SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+			datos = SQL.mostrarTabla()
 			
-			return render_template('admin.html')
+			return render_template('admin.html', datos=datos)
 	except KeyError:
 		msg = 'Para acceder a esta página debes contactar al servicio de atención'
 		return redirect(url_for('loginUsuario'))
