@@ -286,7 +286,7 @@ h2{
     padding: 10px 20px; /* Ajusta el padding según tus preferencias */
     width: 120px; /* Ancho del botón */
     height: 40px; /* Altura del botón */
-    border: 1px solid #000000; /* Agrega un borde */
+    /*border: 1px solid #000000;  Agrega un borde */
     border-radius: 5px; /* Añade esquinas redondeadas */
     cursor: pointer; /* Cambia el cursor al pasar el ratón */
     text-align: center;
