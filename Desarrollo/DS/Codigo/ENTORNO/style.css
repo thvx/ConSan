@@ -326,3 +326,12 @@ footer{
     flex-direction: row;
     gap: 15px;
 }
+
+.github-logo {
+    width: 30px; /* Ajusta el ancho según tus preferencias */
+    height: 30px; /* Mantiene la proporción original */
+    display: inline-block; /* Hace que la imagen y el texto se muestren en línea */
+    vertical-align: middle; /* Alinea verticalmente la imagen y el texto */
+    margin-right: 10px; /* Agrega espacio entre la imagen y el texto (ajusta según sea necesario) */
+  }
+  
