@@ -95,7 +95,7 @@
     cursor: pointer; /* Cambia el cursor al pasar el ratón */
     text-align: center;
     transition: background-color 0.3s, color 0.3s; /* Agrega transiciones suaves al color de fondo y al color del texto */
-    color: #000; /* Cambia el color del texto a negro */
+    color: #fff; /* Cambia el color del texto a negro */
     text-decoration: none; /* Quita el subrayado del texto */
   }
   .boton.active {
@@ -109,7 +109,7 @@
   }
   .boton:hover {
     background-color: #4CAF50; /* Cambia el color de fondo en el hover */
-    color: #fff; /* Cambia el color del texto en el hover */
+    color: #000; /* Cambia el color del texto en el hover */
   }
   
 

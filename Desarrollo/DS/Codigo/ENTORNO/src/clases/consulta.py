@@ -115,6 +115,15 @@ class ConexionSQLServer:
                 cursor.commit()
                 self.cerrarConexion()
     
+    def mostrarTabla(self):
+            self.establecerConexion()
+            if self.conex:
+                cursor = self.conex.cursor()
+                cursor.execute("SELECT U.ID_Usuario, U.Nombre + ' ' + U.Apellido AS Nombre, P.MotivosDenuncia, P.FechaDenuncia, P.Estatus FROM Usuario U INNER JOIN Publicacion P ON U.ID_Usuario = P.ID_Usuario;")
+                datos = cursor.fetchall()
+                self.cerrarConexion
+                return datos
+
     def datosDenuncia(self):
         return None
 
