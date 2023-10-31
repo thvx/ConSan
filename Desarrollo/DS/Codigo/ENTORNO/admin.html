@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración</title>
 </head>
@@ -17,48 +23,48 @@
         </section>
         <nav>
             <div id="nav-opciones">
-                <a class = "nav-opcion" href="index.html">Inicio</a>
-                <a class = "nav-opcion" href="registrarDenuncia.html">Registrar Denuncia</a>
-                <a class = "nav-opcion" href="seguimientoDenuncia.html">Búsqueda por archivo</a> 
-                <a class = "nav-opcion" href="admin.html">Administración</a>               
+                <a class="nav-opcion" href="index.html">Inicio</a>
+                <a class="nav-opcion" href="registrarDenuncia.html">Registrar Denuncia</a>
+                <a class="nav-opcion" href="seguimientoDenuncia.html">Búsqueda por archivo</a>
+                <a class="nav-opcion" href="admin.html">Administración</a>
             </div>
-                <a class = "nav-opcion" href="login.html">Iniciar Sesión</a>
+            <a class="nav-opcion" href="login.html">Iniciar Sesión</a>
         </nav>
     </header>
-    
+
     <main>
-        
+
         <section class="grafico-section">
             <section class="section-2">
-              <h2 class="grafico-titulo">Historia de denuncias</h2>
-              <div class="grafico-fondo">
-                <div class="grafico-tamanio-barras">
-                  <canvas id="grafico-barras-2"></canvas>
+                <h2 class="grafico-titulo">Historia de denuncias</h2>
+                <div class="grafico-fondo">
+                    <div class="grafico-tamanio-barras">
+                        <canvas id="grafico-barras-2"></canvas>
+                    </div>
+
                 </div>
-                
-              </div>
             </section>
-          
+
             <section class="section-1">
-              <h2 class="grafico-titulo">Denuncias resueltas</h2>
-              <div class="grafico-fondo">
-                <div class="grafico-tamanio">
-                  <canvas id="grafico-circular-1"></canvas>
+                <h2 class="grafico-titulo">Denuncias resueltas</h2>
+                <div class="grafico-fondo">
+                    <div class="grafico-tamanio">
+                        <canvas id="grafico-circular-1"></canvas>
+                    </div>
+                    <div class="grafico-elementos">
+                        <ul></ul>
+                    </div>
                 </div>
-                <div class="grafico-elementos">
-                    <ul></ul>
-                </div>
-              </div>
             </section>
-          </section>
-          
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-          <script src="main.js"></script>
+        </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="main.js"></script>
 
         <section>
-            <div >
+            <div>
                 <h2>Administración de denuncia</h2>
-                <form class="formulario-admin" action="#" method="post" enctype="_blank">    
+                <form class="formulario-admin" action="#" method="post" enctype="_blank">
 
                     <div class="buscar">
                         <input id="search" type="search" name="denuncia">
@@ -80,7 +86,7 @@
                             <div class="columna">2798</div>
                             <div class="columna">02/07/1971</div>
                             <div class="columna">Limpieza pública</div>
-                            <div class="columna"><a href=""class="boton active">Active</a> </div>
+                            <div class="columna"><a href="" class="boton active">Active</a> </div>
                         </div>
                         <div class="fila">
                             <div class="columna">2</div>
@@ -88,7 +94,7 @@
                             <div class="columna">4600</div>
                             <div class="columna">28/03/1968</div>
                             <div class="columna">Seguridad pública</div>
-                            <div class="columna"><a href=""class="boton inactive">Inactive</a></div>
+                            <div class="columna"><a href="" class="boton inactive">Inactive</a></div>
                         </div>
                         <div class="fila">
                             <div class="columna">3</div>
@@ -96,7 +102,7 @@
                             <div class="columna">4846</div>
                             <div class="columna">12/08/1994</div>
                             <div class="columna">Reporte de incidente</div>
-                            <div class="columna"><a href=""class="boton active">Active</a></div>
+                            <div class="columna"><a href="" class="boton active">Active</a></div>
                         </div>
                         <div class="fila">
                             <div class="columna">4</div>
@@ -104,21 +110,21 @@
                             <div class="columna">9151</div>
                             <div class="columna">02/01/1980</div>
                             <div class="columna">Seguridad pública</div>
-                            <div class="columna"><a href=""class="boton disabled">Disabled</a></div>
+                            <div class="columna"><a href="" class="boton disabled">Disabled</a></div>
                         </div>
                     </div>
-            
+
                 </form>
             </div>
         </section>
-        
+
     </main>
 
     <footer>
-        
+
         <div class="copyright-grupo">
             <img src="src/denunciaseguro.jpg" alt="Logo de DenunciaSeguro" class="ds-logo">
-            <p>Para la atención de consultas sobre la gestión de denuncias escribir a aaa@aaa.aaa</p>
+            <p>Para la atención de consultas sobre la gestión de denuncias escribir a contactos@ds.com</p>
         </div>
         <div class="copyright-grupo">
             <p>Copyright 2023 - DenunciaSeguro</p>
@@ -126,4 +132,5 @@
         </div>
     </footer>
 </body>
+
 </html>
