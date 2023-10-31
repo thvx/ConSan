@@ -48,7 +48,7 @@ def registroUsuario():
 		fecha_creac = datetime.now()
 		while not verificado:
 			ID_usuario = uuid.uuid4()
-			SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+			SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
 			SQL.setNombreUsuario(usuario)
 			SQL.setCorreo(correo)
 			if SQL.encontrarNombreUsuario() is not None:
@@ -75,7 +75,7 @@ def loginUsuario():
 	correo = request.form.get('correo', False)
 	contrasena = request.form.get('contrasena', False)
 	if request.method == 'POST':
-		SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+		SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
 		SQL.setLoginUsuario(correo, contrasena)
 		if SQL.autenticarUsuario() != None:
 			datos_usuario = SQL.devolverUsuario()
@@ -120,7 +120,7 @@ def registroDenuncia():
 				relevancia = 0
 				while not verificado:
 					ID_publicacion = uuid.uuid4()
-					SQL = ConexionSQLServer('DESKTOP-0QQGSJL', 'DS-BBDD')
+					SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
 					SQL.setUUIDPublicacion(ID_publicacion)
 					motivo_limpio = ''
 					if anonimo == '1':
@@ -162,7 +162,14 @@ def seguimientoDenuncia():
 @app.route('/admin/', methods = ['GET', 'POST'])
 def admin():
 	msg = ''
-	return render_template('admin.html', msg) 
-
+	verificado = False
+	try:
+		if session['logged'] == True and session['admin'] == 1:
+			
+			return render_template('admin.html')
+	except KeyError:
+		msg = 'Para acceder a esta página debes contactar al servicio de atención'
+		return redirect(url_for('loginUsuario'))
+	
 if __name__ == '__main__':
 	app.run(debug = True)
