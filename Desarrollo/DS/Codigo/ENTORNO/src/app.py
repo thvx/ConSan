@@ -5,7 +5,8 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'src/files')
-
+desktop='DESKTOP-0QQGSJL'
+bbdd = 'DS-BBDD'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -25,7 +26,7 @@ def registroUsuario():
 	num_doc = request.form.get('numero-documento', False)
 	contrasena = request.form.get('contrasena', False)
 	correo = request.form.get('correo', False)
-	num_celular = request.form.get('num_celular', False)
+	num_celular = request.form.get('celular', False)
 	confirm_contrasena = request.form.get('verificar-contrasena', False)
 
 	if request.method == 'POST':
@@ -48,7 +49,7 @@ def registroUsuario():
 		fecha_creac = datetime.now()
 		while not verificado:
 			ID_usuario = uuid.uuid4()
-			SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+			SQL = ConexionSQLServer(desktop, bbdd)
 			SQL.setNombreUsuario(usuario)
 			SQL.setCorreo(correo)
 			if SQL.encontrarNombreUsuario() is not None:
@@ -75,7 +76,7 @@ def loginUsuario():
 	correo = request.form.get('correo', False)
 	contrasena = request.form.get('contrasena', False)
 	if request.method == 'POST':
-		SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+		SQL = ConexionSQLServer(desktop, bbdd)
 		SQL.setLoginUsuario(correo, contrasena)
 		if SQL.autenticarUsuario() != None:
 			datos_usuario = SQL.devolverUsuario()
@@ -120,7 +121,7 @@ def registroDenuncia():
 				relevancia = 0
 				while not verificado:
 					ID_publicacion = uuid.uuid4()
-					SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+					SQL = ConexionSQLServer(desktop, bbdd)
 					SQL.setUUIDPublicacion(ID_publicacion)
 					motivo_limpio = ''
 					if anonimo == '1':
@@ -133,7 +134,8 @@ def registroDenuncia():
 						else:
 							motivo_limpio = motivo_limpio + " - " + motivos
 					if SQL.encontrarUUIDPublicacion() == None:
-						array = (str(ID_publicacion), motivo_limpio, descripcion, session['ID_usuario'], fecha, fecha_creac, relevancia)
+						estatus = 'ESPERA'
+						array = (str(ID_publicacion), motivo_limpio, descripcion, session['ID_usuario'], fecha, fecha_creac, relevancia, estatus)
 						print(array)
 						if archivo.filename.endswith(".png"):
 							SQL.setDatosPublicacion(array)
@@ -165,7 +167,7 @@ def admin():
 	verificado = False
 	try:
 		if session['logged'] == True and session['admin'] == 1:
-			SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+			SQL = ConexionSQLServer(desktop, bbdd)
 			datos = SQL.mostrarTabla()
 			
 			return render_template('admin.html', datos=datos)

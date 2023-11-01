@@ -111,7 +111,7 @@ class ConexionSQLServer:
             self.establecerConexion()
             if self.conex:
                 cursor = self.conex.cursor()
-                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?,?);", self.datos_publicacion)
+                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia, Estatus) VALUES(?,?,?,?,?,?,?, ?);", self.datos_publicacion)
                 cursor.commit()
                 self.cerrarConexion()
     
