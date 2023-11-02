@@ -131,7 +131,7 @@ class ConexionSQLServer:
              self.establecerConexion()
              if self.conex:
                  cursor = self.conex.cursor()
-                 cursor.execute("SELECT TOP 3 MotivosDenuncia, Descripcion, Estatus FROM Publicacion;")
+                 cursor.execute("SELECT TOP 3 * FROM Publicacion;")
                  denuncias_principales = cursor.fetchall()
                  self.cerrarConexion()
                  return denuncias_principales
