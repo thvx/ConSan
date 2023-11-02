@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'src/files')
-desktop='DESKTOP-0QQGSJL'
+desktop='DESKTOP-COPG5HT\SQLEXPRESS'
 bbdd = 'DS-BBDD'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -13,7 +13,9 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route('/')
 def inicio():
-	return render_template('index.html')
+    SQL = ConexionSQLServer(desktop, bbdd)
+    denuncias_principales = SQL.obtenerDenunciasPrincipales()
+    return render_template('index.html', denuncias=denuncias_principales)
 
 @app.route('/registro-usuario/', methods = ['GET','POST'])
 def registroUsuario():
@@ -174,6 +176,8 @@ def admin():
 	except KeyError:
 		msg = 'Para acceder a esta página debes contactar al servicio de atención'
 		return redirect(url_for('loginUsuario'))
+	
+
 	
 if __name__ == '__main__':
 	app.run(debug = True)

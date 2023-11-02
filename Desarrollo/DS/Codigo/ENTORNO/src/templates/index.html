@@ -56,11 +56,15 @@
             <input class="form-control me-2" name="busquedalocalidad" type="search" placeholder="Inserte una localidad" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
-        <div class = "bloque-noticias">
+        <div class="bloque-noticias">
           <h2>Lista de denuncias cercanas</h2>
-          <p>Nombre / Descripción de la denuncia</p>
-          <p>Estado de la denuncia</p>
-        </div>
+          <ul>
+            {% for denuncia in denuncias %}
+                <li>
+                    <p>{{ denuncia.MotivosDenuncia }} / {{ denuncia.Descripcion }} / Estado de la denuncia: {{ denuncia.Estatus }}</p>
+                </li>
+            {% endfor %}
+        </ul>
     </aside>
   </section>
 

@@ -126,6 +126,15 @@ class ConexionSQLServer:
 
     def datosDenuncia(self):
         return None
+    
+    def obtenerDenunciasPrincipales(self):
+             self.establecerConexion()
+             if self.conex:
+                 cursor = self.conex.cursor()
+                 cursor.execute("SELECT TOP 3 MotivosDenuncia, Descripcion, Estatus FROM Publicacion;")
+                 denuncias_principales = cursor.fetchall()
+                 self.cerrarConexion()
+                 return denuncias_principales
 
     
 '''
