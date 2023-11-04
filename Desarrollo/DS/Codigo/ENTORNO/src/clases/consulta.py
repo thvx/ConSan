@@ -111,7 +111,7 @@ class ConexionSQLServer:
             self.establecerConexion()
             if self.conex:
                 cursor = self.conex.cursor()
-                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia) VALUES(?,?,?,?,?,?,?);", self.datos_publicacion)
+                cursor.execute("INSERT INTO Publicacion(ID_Publicacion, MotivosDenuncia, Descripcion, ID_Usuario, FechaDenuncia, FechaCreacion, Relevancia, Estatus) VALUES(?,?,?,?,?,?,?, ?);", self.datos_publicacion)
                 cursor.commit()
                 self.cerrarConexion()
     
@@ -126,7 +126,7 @@ class ConexionSQLServer:
 
     def datosDenuncia(self):
         return None
-    
+      
     def actualizarEstatusPublicacion(self, id_publicacion, nuevo_estatus):
         self.establecerConexion()
         if self.conex:
@@ -142,7 +142,15 @@ class ConexionSQLServer:
                 self.cerrarConexion()
         return False
 
-    
+    def obtenerDenunciasPrincipales(self):
+             self.establecerConexion()
+             if self.conex:
+                 cursor = self.conex.cursor()
+                 cursor.execute("SELECT TOP 3 * FROM Publicacion;")
+                 denuncias_principales = cursor.fetchall()
+                 self.cerrarConexion()
+                 return denuncias_principales
+
 '''
 MODO DE USO DE LA CLASE ConexionSQLServer
 
