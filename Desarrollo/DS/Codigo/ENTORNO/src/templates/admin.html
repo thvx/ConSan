@@ -45,6 +45,8 @@
           
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
           <script src="main.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
         <section>
             <div >
@@ -52,30 +54,52 @@
                 <form class="formulario-admin" action="#" method="post" enctype="_blank">    
 
                     <div class="buscar">
-                        <input id="search" type="search" name="denuncia">
-                        <label for="search">Buscar</label>
+                        <input id="search" type="search" name="denuncia" placeholder="Buscar por motivo de denuncia">
+                        <button type="button" id="search-button">Buscar</button>
+                        <button type="button" id="clear-button">Actualizar</button>
                     </div>
 
                     <div class="tabla">
                         <div class="fila titulo">
                             <div class="columna">#</div>
-                            <div class="columna">Name</div>
-                            <div class="columna">User ID</div>
-                            <div class="columna">Fecha</div>
-                            <div class="columna">Categoria</div>
-                            <div class="columna">Status</div>
+                            <div class="columna nombre">Nombre</div>
+                            <div class="columna user-id">User ID</div>
+                            <div class="columna fecha">Fecha</div>
+                            <div class="columna categoria">Categoria</div>
+                            <div class="columna estatus">Estatus</div>
                         </div>
-                        {% for dato in datos %}
-                        <div class="fila">
-                            <div class="columna">{{ loop.index }}</div>
-                            <div class="columna">{{ datos.Nombre }}</div>
-                            <div class="columna">{{ datos.ID_Usuario }}</div>
-                            <div class="columna">{{ datos.FechaCreacion }}</div>
-                            <div class="columna">{{ datos.MotivosDenuncia }}</div>
-                            <div class="columna"><a href="" class="boton {{ datos.Estatus }}">{{ datos.Estatus }}</a></div>
+                        <div class="contenido">
+                            {% for dato in datos %}
+                            <div class="fila">
+                                <div class="columna">{{ loop.index }}</div>
+                                <div class="columna nombre">{{ dato.Nombre }}</div>
+                                <div class="columna user-id">{{ dato.ID_Usuario }}</div>
+                                <div class="columna fecha">{{ dato.FechaDenuncia }}</div>
+                                <div class="columna categoria">{{ dato.MotivosDenuncia }}</div>
+                                <div class="columna estatus"><a href="" class="boton {{ dato.Estatus }}">{{ dato.Estatus }}</a></div>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}   
-                    </div>           
+                    </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#search-button").click(function() {
+                                var valor = $("#search").val();
+                                var denuncias = $(".fila").filter(function() {
+                                    return $(this).find(".columna.categoria").text().toLowerCase().indexOf(valor.toLowerCase()) >= 0;
+                                });
+                                
+                                $(".contenido").html(denuncias);
+                            });
+
+                            $("#clear-button").click(function() {
+                                $("#search").val("");
+                                window.location.reload();
+                            });
+                        });
+                    </script>
+                              
                 </form>
             </div>
         </section>
