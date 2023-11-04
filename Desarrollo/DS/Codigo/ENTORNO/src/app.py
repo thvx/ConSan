@@ -5,8 +5,8 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'static/files')
-desktop='DESKTOP-COPG5HT\SQLEXPRESS'
-bbdd = 'DS-BBDD'
+desktop='LAPTOP-A511R2N8'
+bbdd = 'DB_DenunciaSeguro'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -183,16 +183,13 @@ def actualizar_estatus():
     new_status = request.form.get('newStatus')
 
     # Llama a la función para actualizar el estatus
-    SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+    SQL = ConexionSQLServer(desktop, bbdd)
     exito = SQL.actualizarEstatusPublicacion(public_id, new_status)
 
     if exito:
         return 'Actualización exitosa'
     else:
         return 'Error al actualizar el estatus'
-
-	
-
 	
 if __name__ == '__main__':
 	app.run(debug = True)
