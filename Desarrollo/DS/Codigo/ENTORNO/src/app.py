@@ -171,11 +171,26 @@ def admin():
 		if session['logged'] == True and session['admin'] == 1:
 			SQL = ConexionSQLServer(desktop, bbdd)
 			datos = SQL.mostrarTabla()
-			
+
 			return render_template('admin.html', datos=datos)
 	except KeyError:
 		msg = 'Para acceder a esta página debes contactar al servicio de atención'
 		return redirect(url_for('loginUsuario'))
+
+@app.route('/actualizar-estatus', methods=['POST'])
+def actualizar_estatus():
+    public_id = request.form.get('publicID')
+    new_status = request.form.get('newStatus')
+
+    # Llama a la función para actualizar el estatus
+    SQL = ConexionSQLServer('LAPTOP-A511R2N8', 'DB_DenunciaSeguro')
+    exito = SQL.actualizarEstatusPublicacion(public_id, new_status)
+
+    if exito:
+        return 'Actualización exitosa'
+    else:
+        return 'Error al actualizar el estatus'
+
 	
 
 	

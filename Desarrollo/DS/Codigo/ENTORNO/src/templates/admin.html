@@ -46,7 +46,7 @@
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
           <script src="main.js"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <section>
             <div >
@@ -63,7 +63,7 @@
                         <div class="fila titulo">
                             <div class="columna">#</div>
                             <div class="columna nombre">Nombre</div>
-                            <div class="columna user-id">User ID</div>
+                            <div class="columna public-id">ID Publicacion</div>
                             <div class="columna fecha">Fecha</div>
                             <div class="columna categoria">Categoria</div>
                             <div class="columna estatus">Estatus</div>
@@ -73,7 +73,7 @@
                             <div class="fila">
                                 <div class="columna">{{ loop.index }}</div>
                                 <div class="columna nombre">{{ dato.Nombre }}</div>
-                                <div class="columna user-id">{{ dato.ID_Usuario }}</div>
+                                <div class="columna public-id">{{ dato.ID_Publicacion }}</div>
                                 <div class="columna fecha">{{ dato.FechaDenuncia }}</div>
                                 <div class="columna categoria">{{ dato.MotivosDenuncia }}</div>
                                 <div class="columna estatus"><a href="" class="boton {{ dato.Estatus }}">{{ dato.Estatus }}</a></div>
@@ -96,6 +96,39 @@
                             $("#clear-button").click(function() {
                                 $("#search").val("");
                                 window.location.reload();
+                            });
+                        });
+                    </script>
+                    <script>
+                        $(document).ready(function() {
+                            $('.boton').on('click', function() {
+                                var button = $(this);
+                                var currentStatus = button.text();
+                                var newStatus = '';
+
+                                if (currentStatus === 'active') {
+                                    newStatus = 'inactive';
+                                } else if (currentStatus === 'inactive') {
+                                    newStatus = 'disabled';
+                                } else {
+                                    newStatus = 'active';
+                                }
+
+                                button.text(newStatus);
+
+                                // Envía la actualización al servidor a través de una solicitud AJAX
+                                var publicID = button.closest('.fila').find('.public-id').text();
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/actualizar-estatus', // Ruta del servidor donde se maneja la actualización
+                                    data: { publicID: publicID, newStatus: newStatus },
+                                    success: function(response) {
+                                        console.log('Actualización exitosa');
+                                    },
+                                    error: function(error) {
+                                        console.log('Error al actualizar: ' + error);
+                                    }
+                                });
                             });
                         });
                     </script>
