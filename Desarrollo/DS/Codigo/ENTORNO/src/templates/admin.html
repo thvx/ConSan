@@ -84,28 +84,12 @@
 
                     <script>
                         $(document).ready(function() {
-                            $("#search-button").click(function() {
-                                var valor = $("#search").val();
-                                var denuncias = $(".fila").filter(function() {
-                                    return $(this).find(".columna.categoria").text().toLowerCase().indexOf(valor.toLowerCase()) >= 0;
-                                });
-                                
-                                $(".contenido").html(denuncias);
-                            });
-
-                            $("#clear-button").click(function() {
-                                $("#search").val("");
-                                window.location.reload();
-                            });
-                        });
-                    </script>
-                    <script>
-                        $(document).ready(function() {
-                            $('.boton').on('click', function() {
+                            // Delegar eventos para los botones que pueden cambiar el estatus
+                            $('.contenido').on('click', '.boton', function() {
                                 var button = $(this);
                                 var currentStatus = button.text();
                                 var newStatus = '';
-
+                    
                                 if (currentStatus === 'active') {
                                     newStatus = 'inactive';
                                 } else if (currentStatus === 'inactive') {
@@ -113,9 +97,9 @@
                                 } else {
                                     newStatus = 'active';
                                 }
-
+                    
                                 button.text(newStatus);
-
+                    
                                 // Envía la actualización al servidor a través de una solicitud AJAX
                                 var publicID = button.closest('.fila').find('.public-id').text();
                                 $.ajax({
@@ -130,8 +114,22 @@
                                     }
                                 });
                             });
+
+                            $("#search-button").click(function() {
+                                var valor = $("#search").val().toLowerCase();
+                                var denuncias = $(".fila").filter(function() {
+                                    return $(this).find(".columna.categoria").text().toLowerCase().indexOf(valor) >= 0;
+                                });
+                    
+                                $(".contenido").empty().append(denuncias);
+                            });
+                    
+                            $("#clear-button").click(function() {
+                                $("#search").val("");
+                                window.location.reload();
+                            });
                         });
-                    </script>
+                    </script>                    
                               
                 </form>
             </div>
