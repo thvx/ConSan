@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'static/files')
-desktop='DESKTOP-COPG5HT\SQLEXPRESS'
+desktop='DESKTOP-COPG5HT\SQLEXPRESS' #CAMBIAR DESKTOP Y BBDD A LA CORRESPONDIENTE EN TU PC
 bbdd = 'DS-BBDD'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
