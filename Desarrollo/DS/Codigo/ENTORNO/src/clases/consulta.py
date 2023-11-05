@@ -150,7 +150,15 @@ class ConexionSQLServer:
                  denuncias_principales = cursor.fetchall()
                  self.cerrarConexion()
                  return denuncias_principales
-
+             
+    def obtenerDenunciasUsuario(self, usuario_id):
+             self.establecerConexion()
+             if self.conex:
+                 cursor = self.conex.cursor()
+                 cursor.execute("SELECT MotivosDenuncia, Descripcion, Estatus FROM Publicacion WHERE ID_Usuario = ?;", usuario_id)
+                 denuncias_usuario = cursor.fetchall()
+                 self.cerrarConexion()
+                 return denuncias_usuario
 '''
 MODO DE USO DE LA CLASE ConexionSQLServer
 

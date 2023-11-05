@@ -5,8 +5,8 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'static/files')
-desktop='LAPTOP-A511R2N8'
-bbdd = 'DB_DenunciaSeguro'
+desktop='DESKTOP-COPG5HT\SQLEXPRESS'
+bbdd = 'DS-BBDD'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -97,7 +97,7 @@ def loginUsuario():
 			if session['admin'] == 1:
 				return redirect(url_for('admin'))
 			elif session['admin'] == 0:
-				return redirect(url_for('registroDenuncia'))
+				return redirect(url_for('inicio'))
 		else:
 			msg = 'Correo o contraseña incorrectos'
 	return render_template('inicioSesion.html')
@@ -158,10 +158,16 @@ def registroDenuncia():
 		return redirect(url_for('loginUsuario'))
 	
 
-@app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
+@app.route('/seguimiento-denuncia/')
 def seguimientoDenuncia():
-	msg = ''
-	return render_template('seguimientoDenuncia.html') 
+    if 'logged' in session and session['logged']:
+        SQL = ConexionSQLServer(desktop, bbdd)
+        usuario_id = session['ID_usuario']
+        denuncias_usuario = SQL.obtenerDenunciasUsuario(usuario_id)
+        
+        return render_template('seguimientoDenuncia.html', denuncias=denuncias_usuario)
+    else:
+        return redirect(url_for('loginUsuario'))
 
 @app.route('/admin/', methods = ['GET', 'POST'])
 def admin():
