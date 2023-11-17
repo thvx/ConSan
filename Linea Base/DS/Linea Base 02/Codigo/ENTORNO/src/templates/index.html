@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <section class="seccion-01">
+    <div id="card-captions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#card-captions" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#card-captions" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+        <button type="button" data-bs-target="#card-captions" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
+      </div>
+      <div class="carousel-inner" style="background-color: #777373;">
+        {% for denuncia in denuncias %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="text-center">
+                  <img src="{{ url_for('static', filename='files/' + denuncia.ID_Publicacion + '/' + denuncia.ID_Publicacion + '.png') }}" alt="Imagen de denuncia {{ loop.index }}" class="mx-auto d-block img-small">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+      <button class="carousel-control-prev" type="button" data-bs-target="#card-captions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#card-captions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+
+      <div class="botones">
+          <a href="{{url_for('registroDenuncia')}}" class="btn btn-primary btn-lg">Denunciar</a>
+          <a href="{{url_for('seguimientoDenuncia')}}" class="btn btn-primary btn-lg">Dar seguimiento</a>
+      </div>
+  </section>
+  
+  <section class="seccion-02">
+    <img class="img-main" alt=""  src="..\static\images\main.jpg">
+    <aside class="busqueda-noticias">
+        <form class="d-flex" role="search" action="#" method="post" target="_blank">
+            <input class="form-control me-2" name="busquedalocalidad" type="search" placeholder="Inserte una localidad" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+        <div class="bloque-noticias">
+          <h2>Lista de denuncias cercanas</h2>
+          <ul>
+            {% for denuncia in denuncias %}
+                <li>
+                    <p>{{ denuncia.MotivosDenuncia }} / {{ denuncia.Descripcion }} / Estado de la denuncia: {{ denuncia.Estatus }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+  </section>
+
+  <section class="seccion-03">
+    <h2>Tipos de prueba que reforzarán tu denuncia</h2>
+    <div class="container-principal">
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\camera.svg">
+        <p>Fotografías, audio o video</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\file-earmark-text.svg">
+        <p>Documentación en papel</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\search.svg">
+        <p>Información detallada</p>
+      </div>
+      <div class="element">
+        <img class="icon-prueba" src="..\static\images\eye.svg">
+        <p>Declaración de Testigos</p>
+      </div>
+    </div>
+    <a href="{{url_for('registroDenuncia')}}" class="btn btn-primary btn-lg" id="boton">Inicia tu denuncia</a>
+  </section>
+  <script src="cliente.js"></script>
+{% endblock %}
