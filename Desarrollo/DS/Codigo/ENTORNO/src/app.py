@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'src/files')
-desktop='DESKTOP-COPG5HT\SQLEXPRESS'
+desktop='DESKTOP-0QQGSJL'
 bbdd = 'DS-BBDD'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
@@ -46,7 +46,7 @@ def registroUsuario():
 			msg = 'La contraseña no debe tener menos de 8 digitos'
 			return redirect(url_for('registroUsuario'))
 
-		administrador = 0 
+		administrador = 0
 		foto_perfil = '010101'
 		fecha_creac = datetime.now()
 		while not verificado:
