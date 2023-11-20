@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 import os
 
-PATH_FILE = os.path.join(os.getcwd(), 'static/files')
+PATH_FILE = os.path.join(os.getcwd(), 'Codigo/ENTORNO/src/static/files')
 desktop='DESKTOP-COPG5HT\SQLEXPRESS' #CAMBIAR DESKTOP Y BBDD A LA CORRESPONDIENTE EN TU PC
 bbdd = 'DS-BBDD'
 app = Flask(__name__)
