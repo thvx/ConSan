@@ -119,14 +119,29 @@ class ConexionSQLServer:
             self.establecerConexion()
             if self.conex:
                 cursor = self.conex.cursor()
-                cursor.execute("SELECT U.ID_Usuario, U.Nombre + ' ' + U.Apellido AS Nombre, P.MotivosDenuncia, P.FechaDenuncia, P.Estatus FROM Usuario U INNER JOIN Publicacion P ON U.ID_Usuario = P.ID_Usuario;")
+                cursor.execute("SELECT P.ID_Publicacion, U.Nombre + ' ' + U.Apellido AS Nombre, P.MotivosDenuncia, P.FechaDenuncia, P.Estatus FROM Publicacion P INNER JOIN Usuario U ON P.ID_Usuario = U.ID_Usuario;")
                 datos = cursor.fetchall()
                 self.cerrarConexion
                 return datos
 
     def datosDenuncia(self):
         return None
-    
+      
+    def actualizarEstatusPublicacion(self, id_publicacion, nuevo_estatus):
+        self.establecerConexion()
+        if self.conex:
+            cursor = self.conex.cursor()
+            try:
+                cursor.execute("UPDATE Publicacion SET Estatus = ? WHERE ID_Publicacion = ?", (nuevo_estatus, id_publicacion))
+                self.conex.commit()  # Confirmar la actualización en la base de datos
+                return True
+            except Exception as e:
+                print(f"Error al actualizar el estatus de la publicación: {str(e)}")
+                return False
+            finally:
+                self.cerrarConexion()
+        return False
+
     def obtenerDenunciasPrincipales(self):
              self.establecerConexion()
              if self.conex:
@@ -135,8 +150,15 @@ class ConexionSQLServer:
                  denuncias_principales = cursor.fetchall()
                  self.cerrarConexion()
                  return denuncias_principales
-
-    
+             
+    def obtenerDenunciasUsuario(self, usuario_id):
+             self.establecerConexion()
+             if self.conex:
+                 cursor = self.conex.cursor()
+                 cursor.execute("SELECT MotivosDenuncia, Descripcion, Estatus FROM Publicacion WHERE ID_Usuario = ?;", usuario_id)
+                 denuncias_usuario = cursor.fetchall()
+                 self.cerrarConexion()
+                 return denuncias_usuario
 '''
 MODO DE USO DE LA CLASE ConexionSQLServer
 

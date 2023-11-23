@@ -34,14 +34,20 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Motivo</th>
                         <th>Descripción</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <!-- Aquí se agregarán filas dinámicamente -->
+                    {% for denuncia in denuncias %}
+                    <tr>
+                        <td>{{ denuncia.MotivosDenuncia }}</td>
+                        <td>{{ denuncia.Descripcion }}</td>
+                        <td>{{ denuncia.Estatus }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <a class="btn btn-primary btn-lg" href="{{url_for('registroDenuncia')}}">Agregar Denuncia</a> 

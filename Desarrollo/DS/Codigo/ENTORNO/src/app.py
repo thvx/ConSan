@@ -5,8 +5,8 @@ from datetime import datetime
 import os
 
 PATH_FILE = os.path.join(os.getcwd(), 'static/files')
-desktop='DESKTOP-COPG5HT\SQLEXPRESS'
-bbdd = 'DS-BBDD'
+desktop='DESKTOP-HM51JSI\SQLEXPRESS' #CAMBIAR DESKTOP Y BBDD A LA CORRESPONDIENTE EN TU PC
+bbdd = 'DB_DenunciaSeguro'
 app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -97,7 +97,7 @@ def loginUsuario():
 			if session['admin'] == 1:
 				return redirect(url_for('admin'))
 			elif session['admin'] == 0:
-				return redirect(url_for('registroDenuncia'))
+				return redirect(url_for('inicio'))
 		else:
 			msg = 'Correo o contraseña incorrectos'
 	return render_template('inicioSesion.html')
@@ -158,10 +158,16 @@ def registroDenuncia():
 		return redirect(url_for('loginUsuario'))
 	
 
-@app.route('/seguimiento-denuncia/', methods = ['GET', 'POST'])
+@app.route('/seguimiento-denuncia/')
 def seguimientoDenuncia():
-	msg = ''
-	return render_template('seguimientoDenuncia.html') 
+    if 'logged' in session and session['logged']:
+        SQL = ConexionSQLServer(desktop, bbdd)
+        usuario_id = session['ID_usuario']
+        denuncias_usuario = SQL.obtenerDenunciasUsuario(usuario_id)
+        
+        return render_template('seguimientoDenuncia.html', denuncias=denuncias_usuario)
+    else:
+        return redirect(url_for('loginUsuario'))
 
 @app.route('/admin/', methods = ['GET', 'POST'])
 def admin():
@@ -171,13 +177,25 @@ def admin():
 		if session['logged'] == True and session['admin'] == 1:
 			SQL = ConexionSQLServer(desktop, bbdd)
 			datos = SQL.mostrarTabla()
-			
+
 			return render_template('admin.html', datos=datos)
 	except KeyError:
 		msg = 'Para acceder a esta página debes contactar al servicio de atención'
 		return redirect(url_for('loginUsuario'))
-	
 
+@app.route('/actualizar-estatus', methods=['POST'])
+def actualizar_estatus():
+    public_id = request.form.get('publicID')
+    new_status = request.form.get('newStatus')
+
+    # Llama a la función para actualizar el estatus
+    SQL = ConexionSQLServer(desktop, bbdd)
+    exito = SQL.actualizarEstatusPublicacion(public_id, new_status)
+
+    if exito:
+        return 'Actualización exitosa'
+    else:
+        return 'Error al actualizar el estatus'
 	
 if __name__ == '__main__':
 	app.run(debug = True)

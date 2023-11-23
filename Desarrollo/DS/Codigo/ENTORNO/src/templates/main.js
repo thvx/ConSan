@@ -96,3 +96,26 @@ const populateUl2 = () => {
 };
 
 populateUl2();
+
+// Agrega un controlador de eventos al campo de búsqueda
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function () {
+    // Obtén el término de búsqueda y conviértelo a minúsculas
+    const searchTerm = searchInput.value.toLowerCase();
+
+    // Obtén todas las filas de la tabla
+    const filas = document.querySelectorAll('.fila');
+
+    // Itera a través de las filas
+    filas.forEach(function (fila) {
+        // Obtiene el contenido de la columna "Categoria" y conviértelo a minúsculas
+        const categoria = fila.querySelector('.categoria').textContent.toLowerCase();
+
+        // Realiza la búsqueda en la columna "Categoria"
+        if (categoria.includes(searchTerm)) {
+            fila.style.display = 'block';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+});
