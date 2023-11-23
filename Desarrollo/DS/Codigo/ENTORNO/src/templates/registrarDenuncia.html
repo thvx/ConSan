@@ -29,6 +29,12 @@
     </header>
     
     <main>
+        {% if msg and msg != 'Registrado con éxito' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
         <form class="formulario-completo" action="/registro-denuncia/" method="POST" enctype="multipart/form-data">
         <section class="section-elegir-denuncia" id="seccion1" style="display: flex; flex-direction: column;">
             <h2>Nueva denuncia</h2>

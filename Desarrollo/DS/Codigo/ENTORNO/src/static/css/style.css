@@ -102,9 +102,19 @@ h1{
 .container-principal{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
+
+
+@media (max-width: 768px) {
+    .container-principal {
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+}  
 
 .element{
     display: flex;
@@ -196,11 +206,22 @@ h2{
     text-align: center;
 }
 
-.formulario-completo{
+#seccion1,
+#seccion2,
+#seccion3 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.formulario-completo {
     display: flex;
     flex-direction: column;
     padding: 2%;
     width: 70vw;
+    margin: auto;
 }
 
 .row{

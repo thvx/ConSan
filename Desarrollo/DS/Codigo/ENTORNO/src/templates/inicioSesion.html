@@ -24,6 +24,12 @@
                 <div class="card cascading-right">
                 <div class="card-body p-5 shadow-5 text-center">
                     <h2 class="fw-bold mb-5">Iniciar Sesión</h2>
+                    {% if msg and msg != 'Logeado con éxito' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ msg }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
                         <form class="formulario-registro" action="/login/" method="POST">
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="correo">Correo electrónico</label>
@@ -48,7 +54,7 @@
                 <img src="..\static\images\login.jpg" class="w-100 rounded-4 shadow-4" alt="" />
             </div>
             </div>
-        </div>
+        </div>  
     </main>
 
 
