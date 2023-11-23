@@ -19,7 +19,10 @@
             <ul class="grupo1 nav nav-underline">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('inicio')}}">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{url_for('registroDenuncia')}}">Registrar Denuncia</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{url_for('seguimientoDenuncia')}}">Búsqueda por archivo</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for('seguimientoDenuncia')}}">Seguimiento de Denuncia</a></li>
+            </ul>
+
+            <ul class="grupo2 nav nav-underline"> 
                 {% if not usuario_logueado %}
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url_for('loginUsuario')}}">Iniciar Sesión</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="{{url_for('registroUsuario')}}">Registrar Usuario</a></li>

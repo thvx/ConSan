@@ -11,11 +11,18 @@ app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
 
+def usuario_logueado():
+    return 'logged' in session and session['logged']
+
 @app.route('/')
 def inicio():
-    SQL = ConexionSQLServer(desktop, bbdd)
-    denuncias_principales = SQL.obtenerDenunciasPrincipales()
-    return render_template('index.html', denuncias=denuncias_principales)
+	SQL = ConexionSQLServer(desktop, bbdd)
+	denuncias_principales = SQL.obtenerDenunciasPrincipales()
+	if usuario_logueado():
+		nombre_usuario = session['nombre']
+		return render_template('index.html', denuncias=denuncias_principales, nombre_usuario=nombre_usuario)
+	else:
+		return render_template('index.html', denuncias=denuncias_principales)
 
 @app.route('/registro-usuario/', methods = ['GET','POST'])
 def registroUsuario():
@@ -70,7 +77,7 @@ def registroUsuario():
 				msg = 'Registro con éxito'
 				verificado = True
 		return redirect(url_for('loginUsuario'))
-	return render_template('registroUsuario.html')
+	return render_template('registroUsuario.html', msg=msg)
 
 @app.route('/login/', methods=['GET', 'POST'])
 def loginUsuario():
@@ -100,7 +107,7 @@ def loginUsuario():
 				return redirect(url_for('inicio'))
 		else:
 			msg = 'Correo o contraseña incorrectos'
-	return render_template('inicioSesion.html')
+	return render_template('inicioSesion.html', msg=msg)
 
 @app.route('/logout/')
 def cerrarSesion():
@@ -151,7 +158,7 @@ def registroDenuncia():
 							verificado = True
 						else:
 							msg = 'El archivo que suba debe ser png'
-							return render_template('registrarDenuncia.html')
+							return render_template('registrarDenuncia.html', msg=msg)
 			return render_template('registrarDenuncia.html')
 	except KeyError:
 		msg = 'Para acceder a esta página debes iniciar sesión'
