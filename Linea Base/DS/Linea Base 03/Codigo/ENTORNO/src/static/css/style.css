@@ -1,0 +1,395 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    box-sizing: border-box;
+    font-size: 16px;
+    --color01: #D9D9D9;
+    --color02: black;
+    --color03: #495057;
+}
+
+/*----------Header----------*/
+header{
+    display: flex;
+    flex-direction: column;
+    background: var(--color01);
+}
+
+.titulo{
+    padding: 2%;
+    text-align: center;
+}
+
+h1{
+    color: var(--color02);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.8px;
+}
+
+.barra-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3%;
+}
+
+.grupo2 {
+    margin-left: auto;
+}
+/*---------- Index----------*/
+
+/*----------Seccion 01 principal----------*/
+.seccion-01{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    padding: 4rem;
+    padding-bottom: 6rem;
+    gap: 5%;
+    justify-content: center;
+}
+
+.img-small {
+    width: auto;
+    height: 35vw;
+}
+
+/*----------Sección 02 principal----------*/
+.seccion-02{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 5%;
+}
+
+.img-main{
+    width: 40vw;
+    height: auto;
+}
+.busqueda-noticias{
+    padding: 0px 16px;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.d-flex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+/*----------Sección 03 principal----------*/
+.seccion-03{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 5%;
+}
+
+.container-principal{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    .container-principal {
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+}  
+
+.element{
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.icon-prueba{
+    width: 3rem;
+    height: 3rem;
+    align-self: center;
+    padding-bottom: 3%;
+}
+
+#boton{
+    width: 200px;
+    display: flex;
+}
+/*----------Login-----------*/
+
+.titulo-link{
+    color: var(--color02);
+    text-decoration: none;
+}
+
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 80%;
+    }
+    
+    @media (min-width: 1025px) {
+        .h-custom-2 {
+        height: 80%;
+        }
+    }
+
+/*----------Registro de usuario-----------*/
+.cascading-right {
+    margin-right: -50px;
+  }
+
+.form-label{
+    justify-self: left;
+}
+
+  @media (max-width: 991.98px) {
+    .cascading-right {
+      margin-right: 0;
+    }
+  }
+  
+
+/*----------Seguimiento de denuncias --------*/
+.contenedor-centro{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 10%;
+    padding: 3%;
+}
+
+/*----------Registro de denuncias --------*/
+
+h2{
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.indicador-numero{
+    display: flex;
+    justify-content: center;
+    width: auto;
+    padding: 15px;
+    gap: 30px;
+}
+
+#seccion1, .formulario-completo, #seccion2, #seccion3{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#seccion1,
+#seccion2,
+#seccion3 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.formulario-completo {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 70vw;
+    margin: auto;
+}
+
+.row{
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+}
+
+.col-6 p{
+    text-align:justify;
+    padding: 5%;
+}
+
+.motivos {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.boton-01.clicked {
+    border: 2px solid red;
+    border-radius: 8px; 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); 
+    transform: translateY(2px); 
+}
+
+.boton-01{
+    padding: 5%;
+}
+
+.mb-3{
+    width: 100%;
+}
+
+#seccion3{
+    min-height: 70vh;
+}
+
+/*----------Footer----------*/
+footer{
+    background-color: var(--color03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    padding: 40px;
+    color: white;
+}
+
+.copyright-grupo{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+
+
+/*----------Administración-----------*/
+.formulario-admin{
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+} 
+.buscar{
+    text-align: right;
+    flex-direction: row;
+    border-radius: 10px;
+    justify-content:space-around;
+    margin: 10px;
+}
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+.fila {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+.titulo {
+    font-weight: bold;
+    background-color: #f2f2f2;
+    text-align: left;  
+}
+.columna {
+    flex: 1;
+    padding: 2px;
+}
+/* Estilos para la sección que contiene ambos gráficos */
+.grafico-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  /* Estilos para las secciones de gráficos */
+  .section-1, .section-2 {
+    flex: 1; /* Distribuir el espacio disponible de manera equitativa */
+    padding-bottom: 20px;
+  }
+  .grafico-titulo {
+    font-family: "Rubik", sans-serif;
+    color: #023047;
+    font-size: 24px;
+    text-align: center;
+  }
+  .grafico-tamanio {
+    width: 150px;
+  }
+  .grafico-tamanio-barras {
+    width: 300px;
+  }
+  .grafico-fondo {
+    font-family: "Rubik", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+    width: fit-content;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 8px 32px;
+    color: #023047;
+    transition: all 400ms ease;
+  }
+  .grafico-fondo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+  }
+  .grafico-elementos ul {
+    list-style: none;
+    padding: 0;
+  }
+  .grafico-elementos ul li {
+    font-size: 16px;
+    margin: 12px 0;
+    text-transform: uppercase;
+  }
+  .grafico-elementos .porcentaje {
+    font-weight: 700;
+    color: #e63946;
+  }
+.boton {
+    display: inline-block;
+    padding: 10px 20px; /* Ajusta el padding según tus preferencias */
+    width: 120px; /* Ancho del botón */
+    height: 40px; /* Altura del botón */
+    border: 1px solid #000000; /* Agrega un borde */
+    border-radius: 5px; /* Añade esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Agrega transiciones suaves al color de fondo y al color del texto */
+    color: #000; /* Cambia el color del texto a negro */
+    text-decoration: none; /* Quita el subrayado del texto */
+  }
+  .boton.active {
+    background-color: #2196F3; /* Fondo blanco para el estado activo */
+  }
+  .boton.inactive {
+    background-color: #FFC107; /* Fondo blanco para el estado activo */
+  }
+  .boton.disabled {
+    background-color: #023047; /* Fondo blanco para el estado activo */
+  }
+  .boton:hover {
+    background-color: #4CAF50; /* Cambia el color de fondo en el hover */
+    color: #fff; /* Cambia el color del texto en el hover */
+  }
